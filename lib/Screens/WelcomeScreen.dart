@@ -6,13 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WelcomeScreen extends StatefulWidget {
+class WelcomeScreen extends StatelessWidget {
   static const String id = 'welcomeScreenId';
-  @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
-}
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

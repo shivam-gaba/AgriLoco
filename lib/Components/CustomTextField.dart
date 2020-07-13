@@ -1,17 +1,12 @@
 import 'package:beauty_textfield/beauty_textfield.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatefulWidget {
+class CustomTextField extends StatelessWidget {
   final String hint;
   final Function onSubmitted;
+  final bool inputKhasra;
 
-  CustomTextField({this.hint, this.onSubmitted});
-
-  @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
+  CustomTextField({this.hint, this.onSubmitted, this.inputKhasra});
   @override
   Widget build(BuildContext context) {
     return BeautyTextfield(
@@ -24,9 +19,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       prefixIcon: Icon(
         Icons.filter_hdr,
       ),
-      placeholder: widget.hint,
-      onChanged: widget.onSubmitted,
-      onSubmitted: widget.onSubmitted,
+      placeholder: hint,
+      onChanged: inputKhasra ? null : onSubmitted,
+      onSubmitted: onSubmitted,
     );
   }
 }
