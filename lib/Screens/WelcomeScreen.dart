@@ -1,8 +1,10 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTitle.dart';
 import 'package:agri_loco/Screens/LoginScreen.dart';
-import 'package:agri_loco/Screens/RegisterationScreen.dart';
+import 'package:agri_loco/Screens/RegistrationScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcomeScreenId';
@@ -15,16 +17,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.greenAccent,
         appBar: AppBar(
           leading: Icon(Icons.filter_hdr),
           backgroundColor: Colors.green.shade900,
-          title: Text(
-            'AGRI LOCO',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          title: Text('AGRI LOCO',
+              style: GoogleFonts.indieFlower(
+                letterSpacing: 3,
+                fontWeight: FontWeight.bold,
+              )),
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),
@@ -32,7 +33,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              CustomTitle(),
+              CustomTitle(
+                title: 'AGRI-LOCO',
+              ),
               SizedBox(
                 height: 50,
               ),

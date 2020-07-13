@@ -1,5 +1,5 @@
 import 'package:agri_loco/Screens/LoginScreen.dart';
-import 'package:agri_loco/Screens/RegisterationScreen.dart';
+import 'package:agri_loco/Screens/RegistrationScreen.dart';
 import 'package:agri_loco/Screens/WelcomeScreen.dart';
 import 'package:agri_loco/Utilities/Constants.dart';
 import 'package:flutter/material.dart';

@@ -21,8 +21,17 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  provider: ^4.3.1
+  modal_bottom_sheet: ^0.2.0+1
   flutter_login: ^1.0.14
   animated_text_kit: ^2.2.0
+  google_fonts: ^1.1.0
+  outline_material_icons: ^0.1.1
+  beauty_textfield: ^0.0.1
+  custom_radio_grouped_button: ^1.0.1
+  group_radio_button: ^1.0.1
+  toast: ^0.1.5
+
   flutter:
     sdk: flutter
 

@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class CustomTitle extends StatelessWidget {
-  const CustomTitle({
-    Key key,
-  }) : super(key: key);
+  final String title;
+  CustomTitle({this.title});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: ColorizeAnimatedTextKit(
-        text: ['AGRI-LOCO'],
+        text: [title],
         repeatForever: true,
         colors: <Color>[
           Colors.green.shade900,
