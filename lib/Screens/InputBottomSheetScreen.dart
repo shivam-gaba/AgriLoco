@@ -1,62 +1,138 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
-import 'package:agri_loco/Models/RegistrationData.dart';
+import 'package:agri_loco/Models/FarmerAuthData.dart';
+import 'package:agri_loco/Screens/RegistrationScreen.dart';
+import 'package:agri_loco/Screens/WelcomeScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
-class InputBottomSheet extends StatelessWidget {
+class InputBottomSheet extends StatefulWidget {
+  @override
+  _InputBottomSheetState createState() => _InputBottomSheetState();
+}
+
+class _InputBottomSheetState extends State<InputBottomSheet> {
+  bool spinnerShowing = false;
+
+  Future<void> uploadFarmerInfo(
+      RegistrationData registrationData, BuildContext context) async {
+    setState(() {
+      spinnerShowing = true;
+    });
+
+    try {
+      var _firestore = Firestore.instance;
+      var _farmerAuthReg = _firestore.collection('FarmerAuth');
+      await _farmerAuthReg.add({
+        'name': registrationData.name,
+        'phoneNumber': registrationData.phoneNumber,
+        'adhaarNumber': registrationData.adhaarNumber,
+        'password': registrationData.password,
+        'address': registrationData.address,
+        'numberOfFields': registrationData.numberOfFields,
+        'KhasraNumber': registrationData.getKhasraNumberList.values.toSet()
+      }).whenComplete(() {
+        setState(() {
+          spinnerShowing = false;
+        });
+      }).then((value) {
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.success,
+            confirmBtnColor: Colors.green.shade900,
+            title: 'Registration Successful !!',
+            onConfirmBtnTap: () => Navigator.popUntil(
+                context, ModalRoute.withName(WelcomeScreen.id)));
+        return;
+      }).catchError((onError) {
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.error,
+            confirmBtnColor: Colors.green.shade900,
+            title: 'Registration Failed !! ',
+            onConfirmBtnTap: () => Navigator.popUntil(
+                context, ModalRoute.withName(RegistrationScreen.id)));
+        return;
+      });
+    } catch (e) {
+      CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          confirmBtnColor: Colors.green.shade900,
+          title: 'Registration Failed !!',
+          text: e.toString(),
+          onConfirmBtnTap: () => Navigator.popUntil(
+              context, ModalRoute.withName(RegistrationScreen.id)));
+      return;
+    }
+  }
+
   Widget build(BuildContext context) {
-    return Consumer<RegistrationData>(
-      builder: (BuildContext context, RegistrationData registrationData,
-          Widget child) {
-        return Container(
-            decoration: BoxDecoration(
-              color: Colors.greenAccent,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 20, bottom: 0),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    'Enter Khasra Numbers',
-                    style: TextStyle(
-                        color: Colors.green.shade900,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: (registrationData.numberOfFields) != null
-                            ? int.parse(registrationData.numberOfFields)
-                            : 0,
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return CustomTextField(
-                            inputKhasra: true,
-                            hint: 'Enter Khasra Number',
-                            onSubmitted: (value) {
-                              registrationData
-                                  .addKhasraNumber(int.parse(value));
-                            },
-                          );
-                        }),
-                  ),
-                  CustomButton(
-                    color: Colors.green.shade900,
-                    onPress: () {
-                      //TODO: Firebase Login
-                    },
-                    text: 'Submit',
-                  ),
-                ],
+    return ModalProgressHUD(
+      inAsyncCall: spinnerShowing,
+      child: Consumer<RegistrationData>(
+        builder: (BuildContext context, RegistrationData registrationData,
+            Widget child) {
+          return Container(
+              decoration: BoxDecoration(
+                color: Colors.greenAccent,
               ),
-            ));
-      },
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 20, right: 20, top: 20, bottom: 0),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Enter Khasra Numbers',
+                      style: TextStyle(
+                          color: Colors.green.shade900,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: (registrationData.numberOfFields) != null
+                              ? int.parse(registrationData.numberOfFields)
+                              : 0,
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return CustomTextField(
+                              hint: 'Enter Khasra Number',
+                              onSubmitted: (value) {
+                                registrationData.addKhasraNumber(
+                                    int.parse(value), index);
+                              },
+                            );
+                          }),
+                    ),
+                    CustomButton(
+                      color: Colors.green.shade900,
+                      onPress: () {
+                        if (registrationData.getKhasraNumberList.length <
+                            int.parse(registrationData.numberOfFields)) {
+                          CoolAlert.show(
+                              context: context,
+                              type: CoolAlertType.info,
+                              title: 'Please enter all fields !!',
+                              confirmBtnColor: Colors.green.shade900);
+                        } else {
+                          uploadFarmerInfo(registrationData, context);
+                        }
+                      },
+                      text: 'Submit',
+                    ),
+                  ],
+                ),
+              ));
+        },
+      ),
     );
   }
 }

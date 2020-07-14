@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "871777552164",
+    "firebase_url": "https://agriloco-d97e4.firebaseio.com",
+    "project_id": "agriloco-d97e4",
+    "storage_bucket": "agriloco-d97e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871777552164:android:781bf5ffd70a90cabfd5b1",
+        "android_client_info": {
+          "package_name": "com.ShivamGaba.agri_loco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871777552164-h2qt0cee9pveqmhqn1udf45iof96eufc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpyDNkRA-6UmUbEcZcM_sByC25p0HMua0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871777552164-h2qt0cee9pveqmhqn1udf45iof96eufc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

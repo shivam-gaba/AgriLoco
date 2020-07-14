@@ -57,7 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       radioButtonValue: (value) {
                         _role = value;
                       },
-                      selectedColor: Colors.green,
+                      selectedColor: Colors.green.shade900,
+                      padding: 0,
                     ),
                   ),
                 ),

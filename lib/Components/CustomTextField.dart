@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hint;
   final Function onSubmitted;
-  final bool inputKhasra;
 
-  CustomTextField({this.hint, this.onSubmitted, this.inputKhasra});
+  CustomTextField({this.hint, this.onSubmitted});
   @override
   Widget build(BuildContext context) {
     return BeautyTextfield(
@@ -20,7 +19,7 @@ class CustomTextField extends StatelessWidget {
         Icons.filter_hdr,
       ),
       placeholder: hint,
-      onChanged: inputKhasra ? null : onSubmitted,
+      onChanged: onSubmitted,
       onSubmitted: onSubmitted,
     );
   }

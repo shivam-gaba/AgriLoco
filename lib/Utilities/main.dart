@@ -1,4 +1,4 @@
-import 'package:agri_loco/Models/RegistrationData.dart';
+import 'package:agri_loco/Models/FarmerAuthData.dart';
 import 'package:agri_loco/Screens/LoginScreen.dart';
 import 'package:agri_loco/Screens/RegistrationScreen.dart';
 import 'package:agri_loco/Screens/WelcomeScreen.dart';

@@ -3,7 +3,8 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 
 class RegistrationData extends ChangeNotifier {
-  List<int> _khasraNumbersList = [];
+  Map<int, int> _khasraNumbersList = {};
+
   String _name,
       _address,
       _phoneNumber,
@@ -11,12 +12,12 @@ class RegistrationData extends ChangeNotifier {
       _password,
       _numberOfFields;
 
-  UnmodifiableListView<int> get getKhasraNumberList {
-    return UnmodifiableListView(_khasraNumbersList);
+  UnmodifiableMapView<int, int> get getKhasraNumberList {
+    return UnmodifiableMapView(_khasraNumbersList);
   }
 
-  void addKhasraNumber(int khasraNumber) {
-    _khasraNumbersList.add(khasraNumber);
+  void addKhasraNumber(int khasraNumber, int index) {
+    _khasraNumbersList[index] = khasraNumber;
     notifyListeners();
   }
 
