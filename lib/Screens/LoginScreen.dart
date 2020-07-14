@@ -5,7 +5,6 @@ import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:group_radio_button/group_radio_button.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginScreenId';

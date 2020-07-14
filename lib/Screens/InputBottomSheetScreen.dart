@@ -33,7 +33,7 @@ class _InputBottomSheetState extends State<InputBottomSheet> {
         'password': registrationData.password,
         'address': registrationData.address,
         'numberOfFields': registrationData.numberOfFields,
-        'KhasraNumber': registrationData.getKhasraNumberList.values.toSet()
+        'khasraNumber': registrationData.getKhasraNumberList.values.toList()
       }).whenComplete(() {
         setState(() {
           spinnerShowing = false;
