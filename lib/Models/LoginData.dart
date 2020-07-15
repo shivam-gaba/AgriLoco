@@ -1,11 +1,11 @@
 import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 
-class RegistrationData extends ChangeNotifier {
+class LoginData extends ChangeNotifier {
   Map<int, int> _khasraNumbersList = {};
 
   String _name,
+      _role,
       _address,
       _phoneNumber,
       _adhaarNumber,
@@ -51,6 +51,11 @@ class RegistrationData extends ChangeNotifier {
     notifyListeners();
   }
 
+  set role(value) {
+    _role = value;
+    notifyListeners();
+  }
+
   get numberOfFields => _numberOfFields;
 
   get password => _password;
@@ -62,4 +67,6 @@ class RegistrationData extends ChangeNotifier {
   get address => _address;
 
   get name => _name;
+
+  get role => _role;
 }

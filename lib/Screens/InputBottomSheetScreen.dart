@@ -1,6 +1,6 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
-import 'package:agri_loco/Models/FarmerAuthData.dart';
+import 'package:agri_loco/Models/FarmerRegData.dart';
 import 'package:agri_loco/Screens/RegistrationScreen.dart';
 import 'package:agri_loco/Screens/WelcomeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,7 +18,7 @@ class _InputBottomSheetState extends State<InputBottomSheet> {
   bool spinnerShowing = false;
 
   Future<void> uploadFarmerInfo(
-      RegistrationData registrationData, BuildContext context) async {
+      FarmerRegData registrationData, BuildContext context) async {
     setState(() {
       spinnerShowing = true;
     });
@@ -26,14 +26,14 @@ class _InputBottomSheetState extends State<InputBottomSheet> {
     try {
       var _firestore = Firestore.instance;
       var _farmerAuthReg = _firestore.collection('FarmerAuth');
-      await _farmerAuthReg.add({
+      await _farmerAuthReg.document(registrationData.adhaarNumber).setData({
         'name': registrationData.name,
         'phoneNumber': registrationData.phoneNumber,
         'adhaarNumber': registrationData.adhaarNumber,
         'password': registrationData.password,
         'address': registrationData.address,
         'numberOfFields': registrationData.numberOfFields,
-        'khasraNumber': registrationData.getKhasraNumberList.values.toList()
+        'khasraNumberList': registrationData.getKhasraNumberList.values.toList()
       }).whenComplete(() {
         setState(() {
           spinnerShowing = false;
@@ -73,8 +73,8 @@ class _InputBottomSheetState extends State<InputBottomSheet> {
   Widget build(BuildContext context) {
     return ModalProgressHUD(
       inAsyncCall: spinnerShowing,
-      child: Consumer<RegistrationData>(
-        builder: (BuildContext context, RegistrationData registrationData,
+      child: Consumer<FarmerRegData>(
+        builder: (BuildContext context, FarmerRegData registrationData,
             Widget child) {
           return Container(
               decoration: BoxDecoration(

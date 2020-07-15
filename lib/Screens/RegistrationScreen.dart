@@ -1,7 +1,7 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Components/CustomTitle.dart';
-import 'package:agri_loco/Models/FarmerAuthData.dart';
+import 'package:agri_loco/Models/FarmerRegData.dart';
 import 'package:agri_loco/Screens/InputBottomSheetScreen.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +12,9 @@ class RegistrationScreen extends StatelessWidget {
   static const String id = 'registrationScreenId';
   @override
   Widget build(BuildContext context) {
-    return Consumer<RegistrationData>(
-      builder: (BuildContext context, RegistrationData registrationData,
-          Widget child) {
+    return Consumer<FarmerRegData>(
+      builder:
+          (BuildContext context, FarmerRegData registrationData, Widget child) {
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.greenAccent,
