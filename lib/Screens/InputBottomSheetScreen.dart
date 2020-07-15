@@ -15,12 +15,12 @@ class InputBottomSheet extends StatefulWidget {
 }
 
 class _InputBottomSheetState extends State<InputBottomSheet> {
-  bool spinnerShowing = false;
+  bool _spinnerShowing = false;
 
   Future<void> uploadFarmerInfo(
       FarmerRegData registrationData, BuildContext context) async {
     setState(() {
-      spinnerShowing = true;
+      _spinnerShowing = true;
     });
 
     try {
@@ -36,7 +36,7 @@ class _InputBottomSheetState extends State<InputBottomSheet> {
         'khasraNumberList': registrationData.getKhasraNumberList.values.toList()
       }).whenComplete(() {
         setState(() {
-          spinnerShowing = false;
+          _spinnerShowing = false;
         });
       }).then((value) {
         CoolAlert.show(
@@ -72,7 +72,8 @@ class _InputBottomSheetState extends State<InputBottomSheet> {
 
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      inAsyncCall: spinnerShowing,
+      color: Colors.green.shade900,
+      inAsyncCall: _spinnerShowing,
       child: Consumer<FarmerRegData>(
         builder: (BuildContext context, FarmerRegData registrationData,
             Widget child) {
