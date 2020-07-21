@@ -1,6 +1,6 @@
 import 'package:agri_loco/Components/CustomFieldTile.dart';
-import 'package:agri_loco/Models/Field.dart';
 import 'package:agri_loco/Models/LoginData.dart';
+import 'package:agri_loco/Screens/InputSheets/FieldDetailsInputSheet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +40,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
             showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return Container();
+                  return FieldDetailsInputSheet();
                 });
           },
           child: Icon(Icons.add),

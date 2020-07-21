@@ -1,20 +1,20 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Models/FarmerRegData.dart';
-import 'package:agri_loco/Screens/RegistrationScreen.dart';
-import 'package:agri_loco/Screens/WelcomeScreen.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/RegistrationScreen.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/WelcomeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
-class InputBottomSheet extends StatefulWidget {
+class KhasraNumberInputSheet extends StatefulWidget {
   @override
-  _InputBottomSheetState createState() => _InputBottomSheetState();
+  _KhasraNumberInputSheetState createState() => _KhasraNumberInputSheetState();
 }
 
-class _InputBottomSheetState extends State<InputBottomSheet> {
+class _KhasraNumberInputSheetState extends State<KhasraNumberInputSheet> {
   bool _spinnerShowing = false;
 
   Future<void> uploadFarmerInfo(

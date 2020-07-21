@@ -1,11 +1,11 @@
 import 'package:agri_loco/Models/FarmerRegData.dart';
 import 'package:agri_loco/Models/LoginData.dart';
-import 'package:agri_loco/Screens/AuthorityDashboard.dart';
-import 'package:agri_loco/Screens/FarmerDashboard.dart';
-import 'package:agri_loco/Screens/LoginScreen.dart';
-import 'package:agri_loco/Screens/MinistryDashboard.dart';
-import 'package:agri_loco/Screens/RegistrationScreen.dart';
-import 'package:agri_loco/Screens/WelcomeScreen.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/AuthorityDashboard.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/FarmerDashboard.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/LoginScreen.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/MinistryDashboard.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/RegistrationScreen.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/WelcomeScreen.dart';
 import 'package:agri_loco/Utilities/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
