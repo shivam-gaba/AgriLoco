@@ -25,6 +25,7 @@ class _InputBottomSheetState extends State<InputBottomSheet> {
 
     try {
       var _firestore = Firestore.instance;
+
       var _farmerAuthReg = _firestore.collection('FarmerAuth');
       await _farmerAuthReg.document(registrationData.adhaarNumber).setData({
         'name': registrationData.name,
