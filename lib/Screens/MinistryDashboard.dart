@@ -10,6 +10,10 @@ class MinistryDashboard extends StatefulWidget {
 class _MinistryDashboardState extends State<MinistryDashboard> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+      child: Container(
+        child: Center(child: Text('Ministry')),
+      ),
+    );
   }
 }

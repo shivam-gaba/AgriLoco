@@ -10,6 +10,9 @@ class AuthorityDashboard extends StatefulWidget {
 class _AuthorityDashboardState extends State<AuthorityDashboard> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+        child: Container(
+      child: Center(child: Text('Authority')),
+    ));
   }
 }

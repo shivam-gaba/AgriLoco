@@ -10,6 +10,9 @@ class FarmerDashboard extends StatefulWidget {
 class _FarmerDashboardState extends State<FarmerDashboard> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+        child: Container(
+      child: Center(child: Text('Farmer')),
+    ));
   }
 }
