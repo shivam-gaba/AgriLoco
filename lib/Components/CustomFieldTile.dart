@@ -89,7 +89,7 @@ class CustomFieldTile extends StatelessWidget {
                   child: CustomButton(
                     color: Colors.green.shade900,
                     text: 'Edit',
-                    onPress: null,
+                    onPress: onEditClicked,
                   ),
                 ),
                 SizedBox(
@@ -99,7 +99,7 @@ class CustomFieldTile extends StatelessWidget {
                   child: CustomButton(
                     color: Colors.green.shade900,
                     text: 'Delete',
-                    onPress: null,
+                    onPress: onDeleteClicked,
                   ),
                 ),
               ],
