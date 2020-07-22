@@ -1,4 +1,14 @@
+import 'package:agri_loco/Models/LoginData.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
+
+bool _isSpinnerShowing = false;
+var _fireStore = Firestore.instance;
 
 class AuthorityDashboard extends StatefulWidget {
   static const String id = 'authorityDashboardId';
@@ -10,9 +20,45 @@ class AuthorityDashboard extends StatefulWidget {
 class _AuthorityDashboardState extends State<AuthorityDashboard> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Container(
-      child: Center(child: Text('Authority')),
-    ));
+    return WillPopScope(
+      onWillPop: () {
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.confirm,
+            confirmBtnColor: Colors.green.shade900,
+            title: 'Do you want to Exit ?',
+            confirmBtnText: 'Yes',
+            showCancelBtn: true,
+            cancelBtnText: 'No',
+            onConfirmBtnTap: () {
+              return SystemNavigator.pop();
+            });
+        return;
+      },
+      child: Consumer<LoginData>(
+        builder: (BuildContext context, LoginData loginData, Widget child) {
+          return ModalProgressHUD(
+            inAsyncCall: _isSpinnerShowing,
+            child: MaterialApp(
+              home: Scaffold(
+                appBar: AppBar(
+                  leading: Icon(
+                    Icons.filter_hdr,
+                  ),
+                  backgroundColor: Colors.green.shade900,
+                  title: Text('AGRI LOCO',
+                      style: GoogleFonts.indieFlower(
+                        letterSpacing: 3,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+                body: Container(),
+                backgroundColor: Colors.greenAccent,
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

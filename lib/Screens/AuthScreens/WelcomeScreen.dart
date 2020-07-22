@@ -1,10 +1,11 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTitle.dart';
-import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/LoginScreen.dart';
-import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/RegistrationScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'LoginScreen.dart';
+import 'RegistrationScreen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static const String id = 'welcomeScreenId';

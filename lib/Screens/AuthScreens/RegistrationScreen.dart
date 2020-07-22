@@ -2,7 +2,7 @@ import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Components/CustomTitle.dart';
 import 'package:agri_loco/Models/FarmerRegData.dart';
-import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/InputSheets/KhasraNumberInputSheet.dart';
+import 'package:agri_loco/Screens/InputSheets/KhasraNumberInputSheet.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

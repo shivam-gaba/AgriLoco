@@ -2,10 +2,9 @@ import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Components/CustomTitle.dart';
 import 'package:agri_loco/Models/LoginData.dart';
-import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/AuthorityDashboard.dart';
-import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/FarmerDashboard.dart';
-import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/MinistryDashboard.dart';
-import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/AuthScreens/WelcomeScreen.dart';
+import 'package:agri_loco/Screens/Dashboards/AuthorityDashboard.dart';
+import 'package:agri_loco/Screens/Dashboards/FarmerDashboard.dart';
+import 'package:agri_loco/Screens/Dashboards/MinistryDashboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
@@ -14,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
+
+import 'WelcomeScreen.dart';
 
 bool _isSpinnerShowing = false;
 
