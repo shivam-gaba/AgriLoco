@@ -18,6 +18,22 @@ class FarmerDashboard extends StatefulWidget {
 }
 
 class _FarmerDashboardState extends State<FarmerDashboard> {
+  Future<void> deleteField(LoginData loginData, DocumentSnapshot field) async {
+    setState(() {
+      _isSpinnerShowing = true;
+    });
+    await _fireStore
+        .collection('FieldsData')
+        .document(loginData.adhaarNumber)
+        .collection('FarmerFieldData')
+        .document(field.documentID)
+        .delete();
+
+    setState(() {
+      _isSpinnerShowing = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginData>(
@@ -67,21 +83,15 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
 
               for (var field in fields) {
                 fieldsList.add(CustomFieldTile(
-                    onEditClicked: null,
-                    onDeleteClicked: () async {
-                      setState(() {
-                        _isSpinnerShowing = true;
-                      });
-                      await _fireStore
-                          .collection('FieldsData')
-                          .document(loginData.adhaarNumber)
-                          .collection('FarmerFieldData')
-                          .document(field.documentID)
-                          .delete();
-
-                      setState(() {
-                        _isSpinnerShowing = false;
-                      });
+                    onEditClicked: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return FieldDetailsInputSheet();
+                          });
+                    },
+                    onDeleteClicked: () {
+                      deleteField(loginData, field);
                     },
                     khasraNumber: field.documentID,
                     cropType: field.data['cropType'],

@@ -1,6 +1,7 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Models/LoginData.dart';
+import 'package:agri_loco/Screens/AuthScreens/WelcomeScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/FarmerDashboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
@@ -40,16 +41,7 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
           _isSpinnerShowing = false;
         });
       }).then((value) {
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.success,
-            confirmBtnColor: Colors.green.shade900,
-            title: 'Upload Successful !!',
-            onConfirmBtnTap: () {
-              Navigator.pushNamedAndRemoveUntil(context, FarmerDashboard.id,
-                  ModalRoute.withName(FarmerDashboard.id));
-            });
-        return;
+        return Navigator.pop(context);
       }).catchError((onError) {
         CoolAlert.show(
           context: context,
@@ -57,7 +49,6 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
           confirmBtnColor: Colors.green.shade900,
           title: 'Upload Failed !! ',
         );
-        return;
       });
     } catch (e) {
       CoolAlert.show(
@@ -67,7 +58,6 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
         title: 'Upload Failed !!',
         text: e.toString(),
       );
-      return;
     }
   }
 
