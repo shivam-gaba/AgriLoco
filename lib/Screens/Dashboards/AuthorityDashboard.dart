@@ -14,6 +14,9 @@ import 'package:provider/provider.dart';
 bool _isSpinnerShowing = false;
 var _fireStore = Firestore.instance;
 int _currentPage = 1;
+Position _currentPosition;
+Geolocator _geoLocator;
+bool _isAddFieldButtonVisible = true;
 
 class AuthorityDashboard extends StatefulWidget {
   static const String id = 'authorityDashboardId';
@@ -22,13 +25,9 @@ class AuthorityDashboard extends StatefulWidget {
   _AuthorityDashboardState createState() => _AuthorityDashboardState();
 }
 
-Position _currentPosition;
-Geolocator _geoLocator;
-
 class _AuthorityDashboardState extends State<AuthorityDashboard> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCurrentLocation();
   }
@@ -64,50 +63,44 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
             });
         return;
       },
-      child: ModalProgressHUD(
-        inAsyncCall: _isSpinnerShowing,
-        child: Consumer<LoginData>(
-          builder: (BuildContext context, LoginData loginData, Widget child) {
-            return ModalProgressHUD(
-              inAsyncCall: _isSpinnerShowing,
-              child: MaterialApp(
-                home: Scaffold(
-                  appBar: AppBar(
-                    leading: Icon(
-                      Icons.filter_hdr,
-                    ),
-                    backgroundColor: Colors.green.shade900,
-                    title: Text('AGRI LOCO',
-                        style: GoogleFonts.indieFlower(
-                          letterSpacing: 3,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ),
-                  bottomNavigationBar: FancyBottomNavigation(
-                    textColor: Colors.white,
-                    circleColor: Colors.greenAccent,
-                    activeIconColor: Colors.green.shade900,
-                    inactiveIconColor: Colors.greenAccent,
-                    barBackgroundColor: Colors.green.shade900,
-                    initialSelection: 1,
-                    tabs: [
-                      TabData(iconData: Icons.verified_user, title: "Farmers"),
-                      TabData(iconData: Icons.home, title: "Home"),
-                      TabData(iconData: Icons.filter_hdr, title: "Crops")
-                    ],
-                    onTabChangedListener: (position) {
-                      setState(() {
-                        _currentPage = position;
-                      });
-                    },
-                  ),
-                  backgroundColor: Colors.greenAccent,
-                  body: getCurrentPage(_currentPage),
+      child: Consumer<LoginData>(
+        builder: (BuildContext context, LoginData loginData, Widget child) {
+          return MaterialApp(
+            home: Scaffold(
+              appBar: AppBar(
+                leading: Icon(
+                  Icons.filter_hdr,
                 ),
+                backgroundColor: Colors.green.shade900,
+                title: Text('AGRI LOCO',
+                    style: GoogleFonts.indieFlower(
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.bold,
+                    )),
               ),
-            );
-          },
-        ),
+              bottomNavigationBar: FancyBottomNavigation(
+                textColor: Colors.white,
+                circleColor: Colors.greenAccent,
+                activeIconColor: Colors.green.shade900,
+                inactiveIconColor: Colors.greenAccent,
+                barBackgroundColor: Colors.green.shade900,
+                initialSelection: 1,
+                tabs: [
+                  TabData(iconData: Icons.verified_user, title: "Farmers"),
+                  TabData(iconData: Icons.home, title: "Home"),
+                  TabData(iconData: Icons.filter_hdr, title: "Crops")
+                ],
+                onTabChangedListener: (position) {
+                  setState(() {
+                    _currentPage = position;
+                  });
+                },
+              ),
+              backgroundColor: Colors.greenAccent,
+              body: getCurrentPage(_currentPage),
+            ),
+          );
+        },
       ),
     );
   }
@@ -118,7 +111,50 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
         //Farmer
         return Container();
       case 1:
-        return MapScreen();
+        return ModalProgressHUD(
+          inAsyncCall: _isSpinnerShowing,
+          child: Stack(
+            children: <Widget>[
+              GoogleMap(
+                initialCameraPosition: CameraPosition(
+                    zoom: 6,
+                    target: LatLng(
+                        _currentPosition != null
+                            ? _currentPosition.latitude
+                            : 30.5937,
+                        _currentPosition != null
+                            ? _currentPosition.longitude
+                            : 78.9629)),
+              ),
+              Visibility(
+                visible: _isAddFieldButtonVisible,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CustomButton(
+                        color: Colors.green.shade900,
+                        text: 'ADD A NEW FIELD',
+                        onPress: () {
+                          setState(() {
+                            _isAddFieldButtonVisible = false;
+                          });
+                          //Show a Floating Banner
+                          //Mark Markers
+                          //Show a confirm Button on >3 markers
+                          //Show a dialog box to fill details of that area
+                          //Upload on firebase
+                          //Show coloured area on map
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
       case 2:
         return Container(
             //Crops
@@ -126,43 +162,5 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
       default:
         return null;
     }
-  }
-}
-
-class MapScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //Stack is used to place positioned on the previous item that is map
-    return Stack(
-      children: <Widget>[
-        GoogleMap(
-          initialCameraPosition: CameraPosition(
-              zoom: 6,
-              target: LatLng(
-                  _currentPosition.latitude, _currentPosition.longitude)),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CustomButton(
-                color: Colors.green.shade900,
-                text: 'ADD A NEW FIELD',
-                onPress: () {
-                  //Hide Button
-                  //Show a Floating Banner
-                  //Mark Markers
-                  //Show a confirm Button on >3 markers
-                  //Show a dialog box to fill details of that area
-                  //Upload on firebase
-                  //Show coloured area on map
-                },
-              ),
-            ],
-          ),
-        )
-      ],
-    );
   }
 }

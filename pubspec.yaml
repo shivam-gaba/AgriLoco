@@ -39,6 +39,7 @@ dependencies:
   fancy_bottom_navigation: ^0.3.2
   google_maps_flutter: ^0.5.28+1
   geolocator: ^5.3.2+2
+  dropdown_banner: ^1.4.0
 
   flutter:
     sdk: flutter
