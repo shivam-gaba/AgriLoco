@@ -1,7 +1,7 @@
 import 'package:agri_loco/Components/CustomButton.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:agri_loco/Models/LoginData.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +12,13 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
 bool _isSpinnerShowing = false;
-var _fireStore = Firestore.instance;
 int _currentPage = 1;
 Position _currentPosition;
 Geolocator _geoLocator;
 bool _isAddFieldButtonVisible = true;
 bool _isMarkerBannerVisible = false;
+bool _isMapMarkable = false;
+Set<Marker> _markersSet = Set<Marker>();
 
 class AuthorityDashboard extends StatefulWidget {
   static const String id = 'authorityDashboardId';
@@ -64,7 +65,7 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
             });
         return;
       },
-      child: Consumer(
+      child: Consumer<LoginData>(
         builder: (BuildContext context, LoginData loginData, Widget child) {
           return MaterialApp(
             home: Scaffold(
@@ -117,6 +118,22 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
           child: Stack(
             children: <Widget>[
               GoogleMap(
+                mapType: MapType.hybrid,
+                markers: _markersSet,
+                onTap: _isMapMarkable
+                    ? (LatLng choosedLatLng) {
+                        setState(() {
+                          _markersSet.add(
+                            Marker(
+                              position: choosedLatLng,
+                              markerId: MarkerId(
+                                choosedLatLng.toString(),
+                              ),
+                            ),
+                          );
+                        });
+                      }
+                    : null,
                 initialCameraPosition: CameraPosition(
                     zoom: 6,
                     target: LatLng(
@@ -141,6 +158,7 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
                           setState(() {
                             _isAddFieldButtonVisible = false;
                             _isMarkerBannerVisible = true;
+                            _isMapMarkable = true;
                           });
 
                           //Mark Markers
@@ -157,10 +175,7 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
               Visibility(
                 visible: _isMarkerBannerVisible,
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade900,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  height: 120,
                   margin: EdgeInsets.symmetric(
                     vertical: 20,
                     horizontal: 30,
@@ -169,39 +184,74 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
                     vertical: 20,
                     horizontal: 30,
                   ),
-                  child: Row(
+                  decoration: BoxDecoration(
+                    color: Colors.green.shade900,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
-                        flex: 5,
                         child: Text(
                           'Tap on Map to Add Markers',
+                          softWrap: false,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             wordSpacing: 2,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Expanded(
-                        flex: 3,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                _isAddFieldButtonVisible = true;
-                                _isMarkerBannerVisible = false;
-                              });
-                            },
-                            child: Text('CANCEL',
-                                style: TextStyle(
-                                    color: Colors.green.shade900,
-                                    fontWeight: FontWeight.bold)),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              child: Material(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                child: MaterialButton(
+                                  onPressed: () {},
+                                  child: Text('CONFIRM',
+                                      style: TextStyle(
+                                          color: Colors.green.shade900,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Material(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _markersSet.clear();
+                                      _isAddFieldButtonVisible = true;
+                                      _isMarkerBannerVisible = false;
+                                      _isMapMarkable = false;
+                                    });
+                                  },
+                                  child: Text('CANCEL',
+                                      style: TextStyle(
+                                          color: Colors.green.shade900,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
