@@ -17,6 +17,7 @@ int _currentPage = 1;
 Position _currentPosition;
 Geolocator _geoLocator;
 bool _isAddFieldButtonVisible = true;
+bool _isMarkerBannerVisible = false;
 
 class AuthorityDashboard extends StatefulWidget {
   static const String id = 'authorityDashboardId';
@@ -63,7 +64,7 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
             });
         return;
       },
-      child: Consumer<LoginData>(
+      child: Consumer(
         builder: (BuildContext context, LoginData loginData, Widget child) {
           return MaterialApp(
             home: Scaffold(
@@ -139,8 +140,9 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
                         onPress: () {
                           setState(() {
                             _isAddFieldButtonVisible = false;
+                            _isMarkerBannerVisible = true;
                           });
-                          //Show a Floating Banner
+
                           //Mark Markers
                           //Show a confirm Button on >3 markers
                           //Show a dialog box to fill details of that area
@@ -148,6 +150,58 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
                           //Show coloured area on map
                         },
                       ),
+                    ],
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: _isMarkerBannerVisible,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green.shade900,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 30,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 30,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          'Tap on Map to Add Markers',
+                          style: TextStyle(
+                            wordSpacing: 2,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                _isAddFieldButtonVisible = true;
+                                _isMarkerBannerVisible = false;
+                              });
+                            },
+                            child: Text('CANCEL',
+                                style: TextStyle(
+                                    color: Colors.green.shade900,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -160,7 +214,9 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
             //Crops
             );
       default:
-        return null;
+        return Container(
+          color: Colors.lightGreen,
+        );
     }
   }
 }
