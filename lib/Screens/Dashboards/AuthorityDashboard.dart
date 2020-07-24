@@ -19,6 +19,7 @@ bool _isAddFieldButtonVisible = true;
 bool _isMarkerBannerVisible = false;
 bool _isMapMarkable = false;
 Set<Marker> _markersSet = Set<Marker>();
+Set<Polygon> _polygonsSet = Set<Polygon>();
 
 class AuthorityDashboard extends StatefulWidget {
   static const String id = 'authorityDashboardId';
@@ -110,155 +111,9 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
   Widget getCurrentPage(int pageNumber) {
     switch (pageNumber) {
       case 0:
-        //Farmer
         return Container();
       case 1:
-        return ModalProgressHUD(
-          inAsyncCall: _isSpinnerShowing,
-          child: Stack(
-            children: <Widget>[
-              GoogleMap(
-                mapType: MapType.hybrid,
-                markers: _markersSet,
-                onTap: _isMapMarkable
-                    ? (LatLng choosedLatLng) {
-                        setState(() {
-                          _markersSet.add(
-                            Marker(
-                              position: choosedLatLng,
-                              markerId: MarkerId(
-                                choosedLatLng.toString(),
-                              ),
-                            ),
-                          );
-                        });
-                      }
-                    : null,
-                initialCameraPosition: CameraPosition(
-                    zoom: 6,
-                    target: LatLng(
-                        _currentPosition != null
-                            ? _currentPosition.latitude
-                            : 30.5937,
-                        _currentPosition != null
-                            ? _currentPosition.longitude
-                            : 78.9629)),
-              ),
-              Visibility(
-                visible: _isAddFieldButtonVisible,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CustomButton(
-                        color: Colors.green.shade900,
-                        text: 'ADD A NEW FIELD',
-                        onPress: () {
-                          setState(() {
-                            _isAddFieldButtonVisible = false;
-                            _isMarkerBannerVisible = true;
-                            _isMapMarkable = true;
-                          });
-
-                          //Mark Markers
-                          //Show a confirm Button on >3 markers
-                          //Show a dialog box to fill details of that area
-                          //Upload on firebase
-                          //Show coloured area on map
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Visibility(
-                visible: _isMarkerBannerVisible,
-                child: Container(
-                  height: 120,
-                  margin: EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 30,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 30,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade900,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'Tap on Map to Add Markers',
-                          softWrap: false,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            wordSpacing: 2,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  child: Text('CONFIRM',
-                                      style: TextStyle(
-                                          color: Colors.green.shade900,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _markersSet.clear();
-                                      _isAddFieldButtonVisible = true;
-                                      _isMarkerBannerVisible = false;
-                                      _isMapMarkable = false;
-                                    });
-                                  },
-                                  child: Text('CANCEL',
-                                      style: TextStyle(
-                                          color: Colors.green.shade900,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        );
+        return modalProgressHUD();
       case 2:
         return Container(
             //Crops
@@ -268,5 +123,156 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
           color: Colors.lightGreen,
         );
     }
+  }
+
+  void onMapTapped(LatLng latLng) {
+    if (_isMapMarkable) {
+      _markersSet.add(Marker(
+        markerId: MarkerId(latLng.toString()),
+        position: latLng,
+      ));
+    }
+  }
+
+  void onCancelTapped() {
+    setState(() {
+      _isMapMarkable=false;
+      _isMarkerBannerVisible=false;
+      _isAddFieldButtonVisible=true;
+    });
+  }
+
+  void onConfirmTapped() {
+    setState(() {
+      _isMapMarkable=false;
+      _isMarkerBannerVisible=false;
+      _isAddFieldButtonVisible=true;
+    });
+  }
+
+  void onAddFieldTapped() {
+    setState(() {
+      _isMapMarkable=true;
+      _isMarkerBannerVisible=true;
+      _isAddFieldButtonVisible=false;
+    });
+  }
+
+  ModalProgressHUD modalProgressHUD() {
+    return ModalProgressHUD(
+      inAsyncCall: _isSpinnerShowing,
+      child: Stack(
+        children: <Widget>[
+          GoogleMap(
+            mapType: MapType.hybrid,
+            polygons: _polygonsSet,
+            markers: _markersSet,
+            onTap: onMapTapped,
+            initialCameraPosition: CameraPosition(
+                zoom: 6,
+                target: LatLng(
+                    _currentPosition != null
+                        ? _currentPosition.latitude
+                        : 30.5937,
+                    _currentPosition != null
+                        ? _currentPosition.longitude
+                        : 78.9629)),
+          ),
+          Visibility(
+            visible: _isAddFieldButtonVisible,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CustomButton(
+                    color: Colors.green.shade900,
+                    text: 'ADD A NEW FIELD',
+                    onPress: onAddFieldTapped,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Visibility(
+            visible: _isMarkerBannerVisible,
+            child: Container(
+              height: 120,
+              margin: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 30,
+              ),
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 30,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.green.shade900,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      'Tap on Map to Add Markers',
+                      softWrap: false,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        wordSpacing: 2,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            child: MaterialButton(
+                              onPressed: onConfirmTapped,
+                              child: Text('CONFIRM',
+                                  style: TextStyle(
+                                      color: Colors.green.shade900,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            child: MaterialButton(
+                              onPressed: onCancelTapped,
+                              child: Text('CANCEL',
+                                  style: TextStyle(
+                                      color: Colors.green.shade900,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
