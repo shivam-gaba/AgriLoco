@@ -52,10 +52,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (_farmerData.data != null) {
         if (_farmerData.data["password"] == loginData.password) {
-          setFarmerData(loginData, _farmerData);
-
-          Navigator.pushNamedAndRemoveUntil(context, FarmerDashboard.id,
-              ModalRoute.withName(WelcomeScreen.id));
+          if (_farmerData.data['isVerified'] == true) {
+            setFarmerData(loginData, _farmerData);
+            Navigator.pushNamedAndRemoveUntil(context, FarmerDashboard.id,
+                ModalRoute.withName(WelcomeScreen.id));
+          } else {
+            CoolAlert.show(
+                context: context,
+                type: CoolAlertType.warning,
+                title: '',
+                text: 'User Has Not Been Verified Yet !!',
+                confirmBtnColor: Colors.green.shade900);
+          }
         } else {
           CoolAlert.show(
               context: context,

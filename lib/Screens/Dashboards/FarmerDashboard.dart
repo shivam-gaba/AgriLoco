@@ -1,4 +1,4 @@
-import 'package:agri_loco/Components/CustomFieldTile.dart';
+import 'package:agri_loco/Components/CustomFarmerFieldTile.dart';
 import 'package:agri_loco/Models/LoginData.dart';
 import 'package:agri_loco/Screens/InputSheets/FieldDetailsInputSheet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -96,10 +96,10 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                 }
 
                 var fields = snapshot.data.documents;
-                List<CustomFieldTile> fieldsList = [];
+                List<CustomFarmerFieldTile> fieldsList = [];
 
                 for (var field in fields) {
-                  fieldsList.add(CustomFieldTile(
+                  fieldsList.add(CustomFarmerFieldTile(
                       onEditClicked: () {
                         showModalBottomSheet(
                             context: context,
@@ -110,6 +110,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                       onDeleteClicked: () {
                         deleteField(loginData, field);
                       },
+                      isVerified: field.data['isVerified'],
                       khasraNumber: field.documentID,
                       cropType: field.data['cropType'],
                       fieldSize: field.data['fieldSize'],

@@ -34,7 +34,9 @@ class _KhasraNumberInputSheetState extends State<KhasraNumberInputSheet> {
         'password': registrationData.password,
         'address': registrationData.address,
         'numberOfFields': registrationData.numberOfFields,
-        'khasraNumberList': registrationData.getKhasraNumberList.values.toList()
+        'khasraNumberList':
+            registrationData.getKhasraNumberList.values.toList(),
+        'isVerified': false
       }).whenComplete(() {
         setState(() {
           _spinnerShowing = false;
