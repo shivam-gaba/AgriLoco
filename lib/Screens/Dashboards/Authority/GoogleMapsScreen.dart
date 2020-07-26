@@ -16,9 +16,6 @@ Position _currentPosition;
 Geolocator _geoLocator;
 
 class GoogleMapsScreen extends StatefulWidget {
-  final Position currentPosition;
-  GoogleMapsScreen({this.currentPosition});
-
   @override
   _GoogleMapsScreenState createState() => _GoogleMapsScreenState();
 }
@@ -117,11 +114,11 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
             initialCameraPosition: CameraPosition(
                 zoom: 6,
                 target: LatLng(
-                    widget.currentPosition != null
-                        ? widget.currentPosition.latitude
+                    _currentPosition != null
+                        ? _currentPosition.latitude
                         : 30.5937,
-                    widget.currentPosition != null
-                        ? widget.currentPosition.longitude
+                    _currentPosition != null
+                        ? _currentPosition.longitude
                         : 78.9629)),
           ),
           Visibility(
