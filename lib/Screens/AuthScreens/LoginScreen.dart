@@ -2,7 +2,7 @@ import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Components/CustomTitle.dart';
 import 'package:agri_loco/Models/LoginData.dart';
-import 'package:agri_loco/Screens/Dashboards/AuthorityDashboard.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/Authority/AuthorityDashboard.dart';
 import 'package:agri_loco/Screens/Dashboards/FarmerDashboard.dart';
 import 'package:agri_loco/Screens/Dashboards/MinistryDashboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

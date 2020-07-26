@@ -3,7 +3,7 @@ import 'package:agri_loco/Models/LoginData.dart';
 import 'package:agri_loco/Screens/AuthScreens/LoginScreen.dart';
 import 'package:agri_loco/Screens/AuthScreens/RegistrationScreen.dart';
 import 'package:agri_loco/Screens/AuthScreens/WelcomeScreen.dart';
-import 'package:agri_loco/Screens/Dashboards/AuthorityDashboard.dart';
+import 'file:///C:/Users/Shivam%20Gaba/Desktop/Flutter%20Final%20Projects/agri_loco/lib/Screens/Dashboards/Authority/AuthorityDashboard.dart';
 import 'package:agri_loco/Screens/Dashboards/FarmerDashboard.dart';
 import 'package:agri_loco/Screens/Dashboards/MinistryDashboard.dart';
 import 'package:agri_loco/Utilities/Constants.dart';
