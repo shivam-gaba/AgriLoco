@@ -26,8 +26,6 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
     });
     await _fireStore
         .collection('FieldsData')
-        .document(loginData.adhaarNumber)
-        .collection('FarmerFieldData')
         .document(field.documentID)
         .delete();
 
@@ -83,11 +81,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
               child: Icon(Icons.add),
             ),
             body: StreamBuilder<QuerySnapshot>(
-              stream: _fireStore
-                  .collection('FieldsData')
-                  .document(loginData.adhaarNumber)
-                  .collection('FarmerFieldData')
-                  .snapshots(),
+              stream: _fireStore.collection('FieldsData').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -99,24 +93,25 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                 List<CustomFarmerFieldTile> fieldsList = [];
 
                 for (var field in fields) {
-                  fieldsList.add(CustomFarmerFieldTile(
-                      onEditClicked: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return FieldDetailsInputSheet();
-                            });
-                      },
-                      onDeleteClicked: () {
-                        deleteField(loginData, field);
-                      },
-                      isVerified: field.data['isVerified'],
-                      khasraNumber: field.documentID,
-                      cropType: field.data['cropType'],
-                      fieldSize: field.data['fieldSize'],
-                      waterSource: field.data['waterSource']));
+                  if (field.data['ownerId'] == loginData.adhaarNumber) {
+                    fieldsList.add(CustomFarmerFieldTile(
+                        onEditClicked: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return FieldDetailsInputSheet();
+                              });
+                        },
+                        onDeleteClicked: () {
+                          deleteField(loginData, field);
+                        },
+                        isVerified: field.data['isVerified'],
+                        khasraNumber: field.documentID,
+                        cropType: field.data['cropType'],
+                        fieldSize: field.data['fieldSize'],
+                        waterSource: field.data['waterSource']));
+                  }
                 }
-
                 return ListView(
                   children: fieldsList,
                 );

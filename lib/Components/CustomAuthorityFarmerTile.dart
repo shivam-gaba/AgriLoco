@@ -23,69 +23,67 @@ class CustomAuthorityFarmerTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
         ),
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ListTile(
-                title:
-                    Text('Name', style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(name),
-              ),
-              ListTile(
-                title: Text('Adhaar Number',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(adhaarNumber),
-              ),
-              ListTile(
-                title: Text('Address',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(address),
-              ),
-              ListTile(
-                title: Text('Phone Number',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(phoneNumber),
-              ),
-              ListTile(
-                title: Text('Number Of  Fields',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(numberOfFields),
-              ),
-              ListTile(
-                title: Text('Khasra Numbers',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(khasraNumberList.toString()),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                      color: Colors.green,
-                      text: 'Verify',
-                      onPress: onVerifyClicked,
-                    ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            ListTile(
+              title:
+                  Text('Name', style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(name),
+            ),
+            ListTile(
+              title: Text('Adhaar Number',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(adhaarNumber),
+            ),
+            ListTile(
+              title: Text('Address',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(address),
+            ),
+            ListTile(
+              title: Text('Phone Number',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(phoneNumber),
+            ),
+            ListTile(
+              title: Text('Number Of  Fields',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(numberOfFields),
+            ),
+            ListTile(
+              title: Text('Khasra Numbers',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(khasraNumberList.toString()),
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: CustomButton(
+                    color: Colors.green,
+                    text: 'Verify',
+                    onPress: onVerifyClicked,
                   ),
-                  SizedBox(
-                    width: 20,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: CustomButton(
+                    color: Colors.red,
+                    text: 'Remove',
+                    onPress: onRemoveClicked,
                   ),
-                  Expanded(
-                    child: CustomButton(
-                      color: Colors.red,
-                      text: 'Remove',
-                      onPress: onRemoveClicked,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

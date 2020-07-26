@@ -133,6 +133,66 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
     }
   }
 
+  void verifyFarmer(DocumentSnapshot farmer) async {
+    setState(() {
+      _isCropsSpinnerShowing = true;
+    });
+
+    await _fireStore
+        .collection('FarmerAuth')
+        .document(farmer.documentID)
+        .updateData({'isVerified': true});
+
+    setState(() {
+      _isCropsSpinnerShowing = false;
+    });
+  }
+
+  void removeFarmer(DocumentSnapshot farmer) async {
+    setState(() {
+      _isFarmersSpinnerShowing = true;
+    });
+
+    await _fireStore
+        .collection('FarmerAuth')
+        .document(farmer.documentID)
+        .delete();
+
+    setState(() {
+      _isFarmersSpinnerShowing = false;
+    });
+  }
+
+  void verifyField(DocumentSnapshot field) async {
+    setState(() {
+      _isCropsSpinnerShowing = true;
+    });
+
+    await _fireStore
+        .collection('FieldsData')
+        .document(field.documentID)
+        .updateData({'isVerified': true});
+
+    setState(() {
+      _isCropsSpinnerShowing = false;
+    });
+  }
+
+  void removeField(DocumentSnapshot field) async {
+    setState(() {
+      _isCropsSpinnerShowing = true;
+    });
+
+    await _fireStore
+        .collection('FieldsData')
+        .document(field.documentID)
+        .delete();
+
+    setState(() {
+      _isCropsSpinnerShowing = false;
+    });
+  }
+
   // ignore: non_constant_identifier_names
   ModalProgressHUD CropsVerificationScreen() {
     return ModalProgressHUD(
@@ -152,7 +212,42 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
               ),
             );
           } else {
-            return ListView();
+            var fields = snapshot.data.documents;
+            List<CustomAuthorityFieldTile> fieldsList = [];
+
+            for (var field in fields) {
+              if (field.data['isVerified'] == false) {
+                fieldsList.add(CustomAuthorityFieldTile(
+                  onRemoveClicked: () {
+                    removeField(field);
+                  },
+                  onVerifyClicked: () {
+                    verifyField(field);
+                  },
+                  cropType: field.data['cropType'] ?? '',
+                  waterSource: field.data['waterSource'] ?? '',
+                  khasraNumber: field.documentID ?? '',
+                  fieldSize: field.data['fieldSize'] ?? '',
+                ));
+              }
+            }
+
+            if (fieldsList.isEmpty) {
+              return Center(
+                child: Text(
+                  'No New Crop Verifications Found',
+                  style: TextStyle(
+                    color: Colors.green.shade900,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            } else {
+              return ListView(
+                children: fieldsList,
+              );
+            }
           }
         },
       ),
@@ -182,21 +277,40 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
             List<CustomAuthorityFarmerTile> farmersList = [];
 
             for (var farmer in farmers) {
-              farmersList.add(CustomAuthorityFarmerTile(
-                name: farmer.data['name'],
-                phoneNumber: farmer.data['phoneNumber'],
-                adhaarNumber: farmer.data['adhaarNumber'],
-                address: farmer.data['address'],
-                numberOfFields: farmer.data['numberOfFields'],
-                khasraNumberList: farmer.data['khasraNumberList'],
-                onVerifyClicked: null,
-                onRemoveClicked: null,
-              ));
+              if (farmer.data['isVerified'] == false) {
+                farmersList.add(CustomAuthorityFarmerTile(
+                  name: farmer.data['name'] ?? '',
+                  phoneNumber: farmer.data['phoneNumber'] ?? '',
+                  adhaarNumber: farmer.data['adhaarNumber'] ?? '',
+                  address: farmer.data['address'] ?? '',
+                  numberOfFields: farmer.data['numberOfFields'] ?? '',
+                  khasraNumberList: farmer.data['khasraNumberList'] ?? [],
+                  onVerifyClicked: () {
+                    verifyFarmer(farmer);
+                  },
+                  onRemoveClicked: () {
+                    removeFarmer(farmer);
+                  },
+                ));
+              }
             }
 
-            return ListView(
-              children: farmersList,
-            );
+            if (farmersList.isEmpty) {
+              return Center(
+                child: Text(
+                  'No New User Found',
+                  style: TextStyle(
+                    color: Colors.green.shade900,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            } else {
+              return ListView(
+                children: farmersList,
+              );
+            }
           }
         },
       ),

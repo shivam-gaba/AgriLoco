@@ -26,11 +26,9 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
       var _firestore = Firestore.instance;
       var fieldsData = _firestore.collection('FieldsData');
 
-      await fieldsData
-          .document(loginData.adhaarNumber)
-          .collection('FarmerFieldData')
-          .document(khasraNumber)
-          .setData({
+      await fieldsData.document(khasraNumber).setData({
+        'ownerId': loginData.adhaarNumber,
+        'isVerified': false,
         'cropType': cropType,
         'fieldSize': fieldSize,
         'waterSource': waterSource,

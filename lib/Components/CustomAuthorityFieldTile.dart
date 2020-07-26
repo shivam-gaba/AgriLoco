@@ -25,54 +25,52 @@ class CustomAuthorityFieldTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
         ),
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ListTile(
-                title: Text('Khasra Number',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(khasraNumber),
-              ),
-              ListTile(
-                title: Text('Crop Type',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(cropType),
-              ),
-              ListTile(
-                title: Text('Water Source',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(waterSource),
-              ),
-              ListTile(
-                title: Text('Field Size',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(fieldSize),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                      color: Colors.green,
-                      text: 'Verify',
-                      onPress: onVerifyClicked,
-                    ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            ListTile(
+              title: Text('Khasra Number',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(khasraNumber),
+            ),
+            ListTile(
+              title: Text('Crop Type',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(cropType),
+            ),
+            ListTile(
+              title: Text('Water Source',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(waterSource),
+            ),
+            ListTile(
+              title: Text('Field Size',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(fieldSize),
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: CustomButton(
+                    color: Colors.green,
+                    text: 'Verify',
+                    onPress: onVerifyClicked,
                   ),
-                  SizedBox(
-                    width: 20,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: CustomButton(
+                    color: Colors.red,
+                    text: 'Remove',
+                    onPress: onRemoveClicked,
                   ),
-                  Expanded(
-                    child: CustomButton(
-                      color: Colors.red,
-                      text: 'Remove',
-                      onPress: onRemoveClicked,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
