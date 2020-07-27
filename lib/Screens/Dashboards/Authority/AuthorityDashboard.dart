@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-int _currentPage = 1;
+int _currentPage = 0;
 
 class AuthorityDashboard extends StatefulWidget {
   static const String id = 'authorityDashboardId';
@@ -37,44 +37,38 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
             });
         return;
       },
-      child: Consumer<LoginData>(
-        builder: (BuildContext context, LoginData loginData, Widget child) {
-          return MaterialApp(
-            home: Scaffold(
-              appBar: AppBar(
-                leading: Icon(
-                  Icons.filter_hdr,
-                ),
-                backgroundColor: Colors.green.shade900,
-                title: Text('AGRI LOCO',
-                    style: GoogleFonts.indieFlower(
-                      letterSpacing: 3,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
-              bottomNavigationBar: FancyBottomNavigation(
-                textColor: Colors.white,
-                circleColor: Colors.greenAccent,
-                activeIconColor: Colors.green.shade900,
-                inactiveIconColor: Colors.greenAccent,
-                barBackgroundColor: Colors.green.shade900,
-                initialSelection: 1,
-                tabs: [
-                  TabData(iconData: Icons.verified_user, title: "Farmers"),
-                  TabData(iconData: Icons.home, title: "Home"),
-                  TabData(iconData: Icons.filter_hdr, title: "Crops")
-                ],
-                onTabChangedListener: (position) {
-                  setState(() {
-                    _currentPage = position;
-                  });
-                },
-              ),
-              backgroundColor: Colors.greenAccent,
-              body: getCurrentPage(_currentPage),
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            leading: Icon(
+              Icons.filter_hdr,
             ),
-          );
-        },
+            backgroundColor: Colors.green.shade900,
+            title: Text('AGRI LOCO',
+                style: GoogleFonts.indieFlower(
+                  letterSpacing: 3,
+                  fontWeight: FontWeight.bold,
+                )),
+          ),
+          bottomNavigationBar: FancyBottomNavigation(
+            textColor: Colors.white,
+            circleColor: Colors.greenAccent,
+            activeIconColor: Colors.green.shade900,
+            inactiveIconColor: Colors.greenAccent,
+            barBackgroundColor: Colors.green.shade900,
+            tabs: [
+              TabData(iconData: Icons.filter_hdr, title: "Crops"),
+              TabData(iconData: Icons.verified_user, title: "Farmers"),
+            ],
+            onTabChangedListener: (position) {
+              setState(() {
+                _currentPage = position;
+              });
+            },
+          ),
+          backgroundColor: Colors.greenAccent,
+          body: getCurrentPage(_currentPage),
+        ),
       ),
     );
   }
@@ -83,11 +77,9 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
   Widget getCurrentPage(int pageNumber) {
     switch (pageNumber) {
       case 0:
-        return VerifyFarmersScreen();
-      case 1:
-        return GoogleMapsScreen();
-      case 2:
         return VerifyFieldsScreen();
+      case 1:
+        return VerifyFarmersScreen();
     }
   }
 }
