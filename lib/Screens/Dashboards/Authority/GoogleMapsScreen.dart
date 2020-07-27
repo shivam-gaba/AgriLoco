@@ -1,4 +1,5 @@
 import 'package:agri_loco/Components/CustomButton.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,10 +11,10 @@ bool _isAddFieldButtonVisible = true;
 bool _isMarkerBannerVisible = false;
 bool _isMapMarkable = false;
 Set<Marker> _markersSet = Set<Marker>();
-Set<Polygon> _polygonsSet = Set<Polygon>();
-List<LatLng> _polygonLatLngs = List<LatLng>();
+List<GeoPoint> latLngList = [];
 Position _currentPosition;
 Geolocator _geoLocator;
+var _firestore = Firestore.instance;
 
 class GoogleMapsScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class GoogleMapsScreen extends StatefulWidget {
 }
 
 class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
-  Future<void> getCurrentLocation() async {
+  void getCurrentLocation() async {
     setState(() {
       _isSpinnerShowing = true;
     });
@@ -43,19 +44,10 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
     getCurrentLocation();
   }
 
-  void createPolygon(List<LatLng> latLngList) {
-    _polygonsSet.add(Polygon(
-      polygonId: PolygonId(latLngList.toString()),
-      fillColor: Colors.red.withOpacity(0.50),
-      strokeWidth: 0,
-      points: latLngList,
-    ));
-  }
-
   void onMapTapped(LatLng latLng) {
     if (_isMapMarkable) {
       setState(() {
-        _polygonLatLngs.add(latLng);
+        latLngList.add(GeoPoint(latLng.latitude, latLng.longitude));
         _markersSet.add(Marker(
           markerId: MarkerId(latLng.toString()),
           position: latLng,
@@ -67,14 +59,15 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
   void onCancelTapped() {
     setState(() {
       _markersSet.clear();
+      latLngList.clear();
       _isMapMarkable = false;
       _isMarkerBannerVisible = false;
       _isAddFieldButtonVisible = true;
     });
   }
 
-  void onConfirmTapped() {
-    if (_polygonLatLngs.length < 3) {
+  void onConfirmTapped() async {
+    if (_markersSet.length < 3) {
       CoolAlert.show(
           context: context,
           type: CoolAlertType.warning,
@@ -83,8 +76,21 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
           confirmBtnColor: Colors.green.shade900);
     } else {
       setState(() {
-        createPolygon(_polygonLatLngs);
-        _markersSet.clear();
+        _isSpinnerShowing = true;
+      });
+
+      await _firestore
+          .collection('FieldsData')
+          .document('126')
+          .updateData({'fieldGeoPoints': latLngList});
+
+      await _firestore
+          .collection('FieldsData')
+          .document('126')
+          .updateData({'isVerified': true});
+
+      setState(() {
+        _isSpinnerShowing = false;
         _isMapMarkable = false;
         _isMarkerBannerVisible = false;
         _isAddFieldButtonVisible = true;
@@ -108,7 +114,6 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
         children: <Widget>[
           GoogleMap(
             mapType: MapType.hybrid,
-            polygons: _polygonsSet,
             markers: _markersSet,
             onTap: onMapTapped,
             initialCameraPosition: CameraPosition(

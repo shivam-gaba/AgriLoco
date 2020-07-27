@@ -1,4 +1,6 @@
+import 'package:agri_loco/Screens/Dashboards/Authority/GoogleMapsScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Authority/VerifyFarmersScreen.dart';
+import 'package:agri_loco/Screens/Dashboards/Authority/VerifyFieldsScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:agri_loco/Models/LoginData.dart';
 import 'package:cool_alert/cool_alert.dart';
@@ -7,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'GoogleMapsScreen.dart';
-import 'VerifyFieldsScreen.dart';
 
 int _currentPage = 1;
 
