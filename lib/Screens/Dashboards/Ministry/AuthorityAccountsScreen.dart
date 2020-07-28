@@ -1,5 +1,6 @@
 import 'package:agri_loco/Components/CustomAuthorityTile.dart';
 import 'package:agri_loco/Components/CustomButton.dart';
+import 'package:agri_loco/Screens/InputSheets/AuthorityDetailsInputSheet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -38,7 +39,13 @@ class _AuthorityAccountsScreenState extends State<AuthorityAccountsScreen> {
           CustomButton(
             color: Colors.green.shade900,
             text: 'Add a new Authority',
-            onPress: null,
+            onPress: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return AuthorityDetailsInputSheet();
+                  });
+            },
           ),
           Expanded(
             child: Container(
@@ -59,7 +66,13 @@ class _AuthorityAccountsScreenState extends State<AuthorityAccountsScreen> {
                         phoneNumber: authority.data['phoneNumber'],
                         adhaarNumber: authority.data['adhaarNumber'],
                         password: authority.data['password'],
-                        onEditClicked: () {},
+                        onEditClicked: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return AuthorityDetailsInputSheet();
+                              });
+                        },
                         onRemoveClicked: () {
                           removeAuthority(authority);
                         },
