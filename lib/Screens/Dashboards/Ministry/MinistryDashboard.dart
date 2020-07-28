@@ -1,25 +1,20 @@
-import 'package:agri_loco/Screens/Dashboards/Authority/AuthorityMapsScreen.dart';
-import 'package:agri_loco/Screens/Dashboards/Authority/VerifyFarmersScreen.dart';
-import 'package:agri_loco/Screens/Dashboards/Authority/VerifyFieldsScreen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:agri_loco/Models/LoginData.dart';
+import 'package:agri_loco/Screens/Dashboards/Ministry/MinistryMapScreen.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+
+class MinistryDashboard extends StatefulWidget {
+  static const String id = 'ministryDashboardId';
+
+  @override
+  _MinistryDashboardState createState() => _MinistryDashboardState();
+}
 
 int _currentPage = 0;
 
-class AuthorityDashboard extends StatefulWidget {
-  static const String id = 'authorityDashboardId';
-
-  @override
-  _AuthorityDashboardState createState() => _AuthorityDashboardState();
-}
-
-class _AuthorityDashboardState extends State<AuthorityDashboard> {
+class _MinistryDashboardState extends State<MinistryDashboard> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -57,8 +52,8 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
             inactiveIconColor: Colors.greenAccent,
             barBackgroundColor: Colors.green.shade900,
             tabs: [
-              TabData(iconData: Icons.filter_hdr, title: "Crops"),
-              TabData(iconData: Icons.verified_user, title: "Farmers"),
+              TabData(iconData: Icons.location_city, title: "Map"),
+              TabData(iconData: Icons.filter_hdr, title: "Temp"),
             ],
             onTabChangedListener: (position) {
               setState(() {
@@ -77,9 +72,9 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
   Widget getCurrentPage(int pageNumber) {
     switch (pageNumber) {
       case 0:
-        return VerifyFieldsScreen();
+        return MinistryMapScreen();
       case 1:
-        return VerifyFarmersScreen();
+        return Container();
     }
   }
 }

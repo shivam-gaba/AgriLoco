@@ -8,22 +8,22 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 bool _isSpinnerShowing = false;
 Set<Marker> _markersSet = Set<Marker>();
-List<GeoPoint> latLngList = [];
+List<GeoPoint> _latLngList = [];
 Position _currentPosition;
 Geolocator _geoLocator;
 var _firestore = Firestore.instance;
 
-class GoogleMapsScreen extends StatefulWidget {
+class AuthorityMapsScreen extends StatefulWidget {
   static const String id = 'mapScreenId';
   final String khasraNumber;
 
-  GoogleMapsScreen({@required this.khasraNumber});
+  AuthorityMapsScreen({@required this.khasraNumber});
 
   @override
-  _GoogleMapsScreenState createState() => _GoogleMapsScreenState();
+  _AuthorityMapsScreenState createState() => _AuthorityMapsScreenState();
 }
 
-class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
+class _AuthorityMapsScreenState extends State<AuthorityMapsScreen> {
   void getCurrentLocation() async {
     setState(() {
       _isSpinnerShowing = true;
@@ -31,6 +31,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
 
     //Gets Current Location with help of GeoLocator library
     _geoLocator = Geolocator()..forceAndroidLocationManager;
+
     _currentPosition = await _geoLocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
 
@@ -48,7 +49,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
 
   void onMapTapped(LatLng latLng) {
     setState(() {
-      latLngList.add(GeoPoint(latLng.latitude, latLng.longitude));
+      _latLngList.add(GeoPoint(latLng.latitude, latLng.longitude));
       _markersSet.add(Marker(
         markerId: MarkerId(latLng.toString()),
         position: latLng,
@@ -59,7 +60,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
   void onCancelTapped() {
     setState(() {
       _markersSet.clear();
-      latLngList.clear();
+      _latLngList.clear();
     });
     Navigator.pop(context);
   }
@@ -80,7 +81,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
       await _firestore
           .collection('FieldsData')
           .document(widget.khasraNumber)
-          .updateData({'fieldGeoPoints': latLngList});
+          .updateData({'fieldGeoPoints': _latLngList});
 
       await _firestore
           .collection('FieldsData')
@@ -92,7 +93,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
       });
     }
     _markersSet.clear();
-    latLngList.clear();
+    _latLngList.clear();
     Navigator.pop(context);
   }
 
@@ -109,7 +110,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
                 markers: _markersSet,
                 onTap: onMapTapped,
                 initialCameraPosition: CameraPosition(
-                    zoom: 6,
+                    zoom: 7,
                     target: LatLng(
                         _currentPosition != null
                             ? _currentPosition.latitude

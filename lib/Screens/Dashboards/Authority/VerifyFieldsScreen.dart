@@ -1,5 +1,5 @@
 import 'package:agri_loco/Components/CustomAuthorityFieldTile.dart';
-import 'package:agri_loco/Screens/Dashboards/Authority/GoogleMapsScreen.dart';
+import 'package:agri_loco/Screens/Dashboards/Authority/AuthorityMapsScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -17,7 +17,7 @@ class _VerifyFieldsScreenState extends State<VerifyFieldsScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GoogleMapsScreen(
+        builder: (context) => AuthorityMapsScreen(
           khasraNumber: field.documentID,
         ),
       ),

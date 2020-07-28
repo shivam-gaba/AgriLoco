@@ -49,7 +49,7 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
             onConfirmBtnTap: () {
               return SystemNavigator.pop();
             });
-        return;
+        return null;
       },
       child: Consumer<LoginData>(
           builder: (BuildContext context, LoginData loginData, Widget child) {

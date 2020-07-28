@@ -30,80 +30,78 @@ class CustomFarmerFieldTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
         ),
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  color: isVerified ? Colors.green : Colors.red,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: ListTile(
-                    title: Text(
-                      isVerified ? 'Verified' : 'Not Verified',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                color: isVerified ? Colors.green : Colors.red,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: ListTile(
+                  title: Text(
+                    isVerified ? 'Verified' : 'Not Verified',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    trailing: isVerified
-                        ? Icon(
-                            Icons.verified_user,
-                            color: Colors.white,
-                          )
-                        : Icon(
-                            Icons.error,
-                            color: Colors.white,
-                          ),
                   ),
+                  trailing: isVerified
+                      ? Icon(
+                          Icons.verified_user,
+                          color: Colors.white,
+                        )
+                      : Icon(
+                          Icons.error,
+                          color: Colors.white,
+                        ),
                 ),
               ),
-              ListTile(
-                title: Text('Khasra Number',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(khasraNumber),
-              ),
-              ListTile(
-                title: Text('Crop Type',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(cropType),
-              ),
-              ListTile(
-                title: Text('Water Source',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(waterSource),
-              ),
-              ListTile(
-                title: Text('Field Size',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text(fieldSize),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: CustomButton(
-                      color: Colors.green.shade900,
-                      text: 'Edit',
-                      onPress: onEditClicked,
-                    ),
+            ),
+            ListTile(
+              title: Text('Khasra Number',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(khasraNumber),
+            ),
+            ListTile(
+              title: Text('Crop Type',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(cropType),
+            ),
+            ListTile(
+              title: Text('Water Source',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(waterSource),
+            ),
+            ListTile(
+              title: Text('Field Size',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(fieldSize),
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: CustomButton(
+                    color: Colors.green.shade900,
+                    text: 'Edit',
+                    onPress: onEditClicked,
                   ),
-                  SizedBox(
-                    width: 20,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: CustomButton(
+                    color: Colors.green.shade900,
+                    text: 'Delete',
+                    onPress: onDeleteClicked,
                   ),
-                  Expanded(
-                    child: CustomButton(
-                      color: Colors.green.shade900,
-                      text: 'Delete',
-                      onPress: onDeleteClicked,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
