@@ -1,3 +1,4 @@
+import 'package:agri_loco/Screens/Dashboards/Ministry/AuthorityAccountsScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Ministry/MinistryMapScreen.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
@@ -53,7 +54,7 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
             barBackgroundColor: Colors.green.shade900,
             tabs: [
               TabData(iconData: Icons.location_city, title: "Map"),
-              TabData(iconData: Icons.filter_hdr, title: "Temp"),
+              TabData(iconData: Icons.person_add, title: "Authorities"),
             ],
             onTabChangedListener: (position) {
               setState(() {
@@ -74,7 +75,7 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
       case 0:
         return MinistryMapScreen();
       case 1:
-        return Container();
+        return AuthorityAccountsScreen();
     }
   }
 }

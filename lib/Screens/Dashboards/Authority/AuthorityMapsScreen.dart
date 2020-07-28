@@ -106,6 +106,8 @@ class _AuthorityMapsScreenState extends State<AuthorityMapsScreen> {
           child: Stack(
             children: <Widget>[
               GoogleMap(
+                compassEnabled: true,
+                myLocationEnabled: true,
                 mapType: MapType.hybrid,
                 markers: _markersSet,
                 onTap: onMapTapped,

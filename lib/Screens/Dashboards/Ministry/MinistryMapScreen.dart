@@ -1,4 +1,3 @@
-import 'package:agri_loco/Screens/Dashboards/Authority/AuthorityMapsScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -9,7 +8,7 @@ class MinistryMapScreen extends StatefulWidget {
   @override
   _MinistryMapScreenState createState() => _MinistryMapScreenState();
 }
-//hey
+
 bool _isSpinnerShowing = false;
 Geolocator _geoLocator;
 Position _currentPosition;
@@ -78,8 +77,8 @@ class _MinistryMapScreenState extends State<MinistryMapScreen> {
 
     for (int i = 0; i < fieldsLatLngsList.length; i++) {
       polygons.add(Polygon(
-        strokeWidth: 1,
-        fillColor: getCropColor(cropNames[i]).withOpacity(0.7),
+        strokeWidth: 0,
+        fillColor: getCropColor(cropNames[i]).withOpacity(0.8),
         points: fieldsLatLngsList[i],
         polygonId: PolygonId(fieldsLatLngsList[i].toString()),
       ));
@@ -102,6 +101,7 @@ class _MinistryMapScreenState extends State<MinistryMapScreen> {
     return ModalProgressHUD(
       inAsyncCall: _isSpinnerShowing,
       child: GoogleMap(
+        compassEnabled: true,
         mapType: MapType.hybrid,
         polygons: polygons,
         initialCameraPosition: CameraPosition(
