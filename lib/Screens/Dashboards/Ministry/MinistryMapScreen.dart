@@ -9,7 +9,7 @@ class MinistryMapScreen extends StatefulWidget {
   @override
   _MinistryMapScreenState createState() => _MinistryMapScreenState();
 }
-
+//hey
 bool _isSpinnerShowing = false;
 Geolocator _geoLocator;
 Position _currentPosition;
