@@ -6,10 +6,13 @@ class FarmerRegData extends ChangeNotifier {
   Map<int, int> _khasraNumbersList = {};
 
   String _name,
-      _address,
       _phoneNumber,
       _adhaarNumber,
       _password,
+      _city,
+      _state,
+      _village,
+      _district,
       _numberOfFields;
 
   UnmodifiableMapView<int, int> get getKhasraNumberList {
@@ -23,11 +26,6 @@ class FarmerRegData extends ChangeNotifier {
 
   set name(String value) {
     _name = value;
-    notifyListeners();
-  }
-
-  set address(value) {
-    _address = value;
     notifyListeners();
   }
 
@@ -59,7 +57,33 @@ class FarmerRegData extends ChangeNotifier {
 
   get phoneNumber => _phoneNumber;
 
-  get address => _address;
+  get city => _city;
+
+  set city(value) {
+    _city = value;
+    notifyListeners();
+  }
 
   get name => _name;
+
+  get state => _state;
+
+  set state(value) {
+    _state = value;
+    notifyListeners();
+  }
+
+  get village => _village;
+
+  set village(value) {
+    _village = value;
+    notifyListeners();
+  }
+
+  get district => _district;
+
+  set district(value) {
+    _district = value;
+    notifyListeners();
+  }
 }

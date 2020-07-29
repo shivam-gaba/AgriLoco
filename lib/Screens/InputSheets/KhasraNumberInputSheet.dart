@@ -32,7 +32,10 @@ class _KhasraNumberInputSheetState extends State<KhasraNumberInputSheet> {
         'phoneNumber': registrationData.phoneNumber,
         'adhaarNumber': registrationData.adhaarNumber,
         'password': registrationData.password,
-        'address': registrationData.address,
+        'city': registrationData.city,
+        'state': registrationData.state,
+        'district': registrationData.district,
+        'village': registrationData.village,
         'numberOfFields': registrationData.numberOfFields,
         'khasraNumberList':
             registrationData.getKhasraNumberList.values.toList(),
