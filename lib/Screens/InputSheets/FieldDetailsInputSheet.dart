@@ -3,6 +3,7 @@ import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Models/LoginData.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:custom_radio_grouped_button/CustomButtons/CustomRadioButton.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -70,6 +71,7 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
             children: <Widget>[
               CustomTextField(
                 hint: 'Khasra Number',
+                inputType: TextInputType.number,
                 onSubmitted: (value) {
                   setState(() {
                     khasraNumber = value;
@@ -86,19 +88,33 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
               ),
               CustomTextField(
                 hint: 'Field Size',
+                inputType: TextInputType.number,
                 onSubmitted: (value) {
                   setState(() {
                     fieldSize = value;
                   });
                 },
               ),
-              CustomTextField(
-                hint: 'Water Source',
-                onSubmitted: (value) {
-                  setState(() {
-                    waterSource = value;
-                  });
-                },
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomRadioButton(
+                  buttonColor: Colors.white,
+                  autoWidth: true,
+                  height: 40,
+                  enableShape: true,
+                  buttonLables: ["Canal", "Ground"],
+                  buttonValues: ["Canal", "Ground"],
+                  radioButtonValue: (value) {
+                    setState(() {
+                      waterSource = value;
+                    });
+                  },
+                  selectedColor: Colors.green.shade900,
+                  padding: 0,
+                ),
               ),
               CustomButton(
                   color: Colors.green.shade900,
@@ -107,8 +123,10 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                     //TODO: Firebase send data
                     if (khasraNumber != null &&
                         fieldSize != null &&
-                        waterSource != null &&
                         cropType != null) {
+                      if (waterSource == null) {
+                        waterSource = 'Canal';
+                      }
                       sendFieldData(loginData, context);
                     } else {
                       CoolAlert.show(

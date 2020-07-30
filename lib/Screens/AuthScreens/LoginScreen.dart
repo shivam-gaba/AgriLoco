@@ -54,8 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
         if (_farmerData.data["password"] == loginData.password) {
           if (_farmerData.data['isVerified'] == true) {
             setFarmerData(loginData, _farmerData);
-            Navigator.pushNamedAndRemoveUntil(context, FarmerDashboard.id,
-                ModalRoute.withName(WelcomeScreen.id));
+
+            Navigator.pushNamed(context, FarmerDashboard.id);
           } else {
             CoolAlert.show(
                 context: context,
@@ -89,8 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
           loginData.adhaarNumber = _authorityData.data["adhaarNumber"];
           loginData.password = _authorityData.data["password"];
 
-          Navigator.pushNamedAndRemoveUntil(context, AuthorityDashboard.id,
-              ModalRoute.withName(WelcomeScreen.id));
+          Navigator.pushNamed(context, AuthorityDashboard.id);
         } else {
           CoolAlert.show(
               context: context,
@@ -116,8 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
           loginData.adhaarNumber = _ministryData.data["adhaarNumber"];
           loginData.password = _ministryData.data["password"];
 
-          Navigator.pushNamedAndRemoveUntil(context, MinistryDashboard.id,
-              ModalRoute.withName(WelcomeScreen.id));
+          Navigator.pushNamed(context, MinistryDashboard.id);
         } else {
           CoolAlert.show(
               context: context,
@@ -146,78 +144,76 @@ class _LoginScreenState extends State<LoginScreen> {
       inAsyncCall: _isSpinnerShowing,
       child: Consumer<LoginData>(
         builder: (BuildContext context, LoginData loginData, Widget child) {
-          return SafeArea(
-            child: Scaffold(
-              backgroundColor: Colors.greenAccent,
-              appBar: AppBar(
-                leading: Icon(Icons.filter_hdr),
-                backgroundColor: Colors.green.shade900,
-                title: Text('AGRI LOCO',
-                    style: GoogleFonts.indieFlower(
-                      letterSpacing: 3,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
-              body: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CustomTitle(
-                        title: 'Login',
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      CustomRadioButton(
-                        horizontal: true,
-                        buttonColor: Colors.white,
-                        autoWidth: true,
-                        height: 40,
-                        enableShape: true,
-                        buttonLables: ["Farmer", "Authority", "Ministry"],
-                        buttonValues: ["Farmer", "Authority", "Ministry"],
-                        radioButtonValue: (value) {
-                          loginData.role = value;
-                        },
-                        selectedColor: Colors.green.shade900,
-                        padding: 0,
-                      ),
-                      Expanded(
-                        child: ListView(
-                          children: <Widget>[
-                            CustomTextField(
-                              hint: 'Adhaar Number',
-                              onSubmitted: (data) {
-                                loginData.adhaarNumber = data;
-                              },
-                            ),
-                            CustomTextField(
-                              hint: 'Password',
-                              onSubmitted: (data) {
-                                loginData.password = data;
-                              },
-                            ),
-                            CustomButton(
-                              color: Colors.green.shade900,
-                              onPress: () {
-                                setState(() {
-                                  _isSpinnerShowing = true;
-                                });
-                                if (loginData.role == null) {
-                                  loginData.role = 'Farmer';
-                                }
-                                loginUser(loginData, context);
-                              },
-                              text: 'Login',
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+          return Scaffold(
+            backgroundColor: Colors.greenAccent,
+            appBar: AppBar(
+              leading: Icon(Icons.filter_hdr),
+              backgroundColor: Colors.green.shade900,
+              title: Text('AGRI LOCO',
+                  style: GoogleFonts.indieFlower(
+                    letterSpacing: 3,
+                    fontWeight: FontWeight.bold,
                   )),
             ),
+            body: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CustomTitle(
+                      title: 'Login',
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    CustomRadioButton(
+                      horizontal: true,
+                      buttonColor: Colors.white,
+                      autoWidth: true,
+                      height: 40,
+                      enableShape: true,
+                      buttonLables: ["Farmer", "Authority", "Ministry"],
+                      buttonValues: ["Farmer", "Authority", "Ministry"],
+                      radioButtonValue: (value) {
+                        loginData.role = value;
+                      },
+                      selectedColor: Colors.green.shade900,
+                      padding: 0,
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: <Widget>[
+                          CustomTextField(
+                            hint: 'Adhaar Number',
+                            onSubmitted: (data) {
+                              loginData.adhaarNumber = data;
+                            },
+                          ),
+                          CustomTextField(
+                            hint: 'Password',
+                            onSubmitted: (data) {
+                              loginData.password = data;
+                            },
+                          ),
+                          CustomButton(
+                            color: Colors.green.shade900,
+                            onPress: () {
+                              setState(() {
+                                _isSpinnerShowing = true;
+                              });
+                              if (loginData.role == null) {
+                                loginData.role = 'Farmer';
+                              }
+                              loginUser(loginData, context);
+                            },
+                            text: 'Login',
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )),
           );
         },
       ),

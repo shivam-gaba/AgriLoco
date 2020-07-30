@@ -19,54 +19,36 @@ class AuthorityDashboard extends StatefulWidget {
 class _AuthorityDashboardState extends State<AuthorityDashboard> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.confirm,
-            confirmBtnColor: Colors.green.shade900,
-            title: 'Do you want to Exit ?',
-            confirmBtnText: 'Yes',
-            showCancelBtn: true,
-            cancelBtnText: 'No',
-            onConfirmBtnTap: () {
-              return SystemNavigator.pop();
-            });
-        return;
-      },
-      child: MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            leading: Icon(
-              Icons.filter_hdr,
-            ),
-            backgroundColor: Colors.green.shade900,
-            title: Text('AGRI LOCO',
-                style: GoogleFonts.indieFlower(
-                  letterSpacing: 3,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
-          bottomNavigationBar: FancyBottomNavigation(
-            textColor: Colors.white,
-            circleColor: Colors.greenAccent,
-            activeIconColor: Colors.green.shade900,
-            inactiveIconColor: Colors.greenAccent,
-            barBackgroundColor: Colors.green.shade900,
-            tabs: [
-              TabData(iconData: Icons.filter_hdr, title: "Crops"),
-              TabData(iconData: Icons.verified_user, title: "Farmers"),
-            ],
-            onTabChangedListener: (position) {
-              setState(() {
-                _currentPage = position;
-              });
-            },
-          ),
-          backgroundColor: Colors.greenAccent,
-          body: getCurrentPage(_currentPage),
+    return Scaffold(
+      appBar: AppBar(
+        leading: Icon(
+          Icons.filter_hdr,
         ),
+        backgroundColor: Colors.green.shade900,
+        title: Text('AGRI LOCO',
+            style: GoogleFonts.indieFlower(
+              letterSpacing: 3,
+              fontWeight: FontWeight.bold,
+            )),
       ),
+      bottomNavigationBar: FancyBottomNavigation(
+        textColor: Colors.white,
+        circleColor: Colors.greenAccent,
+        activeIconColor: Colors.green.shade900,
+        inactiveIconColor: Colors.greenAccent,
+        barBackgroundColor: Colors.green.shade900,
+        tabs: [
+          TabData(iconData: Icons.filter_hdr, title: "Crops"),
+          TabData(iconData: Icons.verified_user, title: "Farmers"),
+        ],
+        onTabChangedListener: (position) {
+          setState(() {
+            _currentPage = position;
+          });
+        },
+      ),
+      backgroundColor: Colors.greenAccent,
+      body: getCurrentPage(_currentPage),
     );
   }
 

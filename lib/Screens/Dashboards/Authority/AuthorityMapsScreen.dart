@@ -8,36 +8,21 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 bool _isSpinnerShowing = false;
 Set<Marker> _markersSet = Set<Marker>();
 List<GeoPoint> _latLngList = [];
-Position _currentPosition;
-Geolocator _geoLocator;
+
 var _firestore = Firestore.instance;
 
 class AuthorityMapsScreen extends StatefulWidget {
   static const String id = 'mapScreenId';
   final String khasraNumber;
+  final Position currentPosition;
 
-  AuthorityMapsScreen({@required this.khasraNumber});
+  AuthorityMapsScreen({@required this.khasraNumber, this.currentPosition});
 
   @override
   _AuthorityMapsScreenState createState() => _AuthorityMapsScreenState();
 }
 
 class _AuthorityMapsScreenState extends State<AuthorityMapsScreen> {
-  void getCurrentLocation() async {
-    //Gets Current Location with help of GeoLocator library
-    _geoLocator = Geolocator()..forceAndroidLocationManager;
-
-    _currentPosition = await _geoLocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getCurrentLocation();
-  }
-
   void onMapTapped(LatLng latLng) {
     setState(() {
       _latLngList.add(GeoPoint(latLng.latitude, latLng.longitude));
@@ -105,11 +90,11 @@ class _AuthorityMapsScreenState extends State<AuthorityMapsScreen> {
                 initialCameraPosition: CameraPosition(
                     zoom: 7,
                     target: LatLng(
-                        _currentPosition != null
-                            ? _currentPosition.latitude
+                        widget.currentPosition != null
+                            ? widget.currentPosition.latitude
                             : 30.5937,
-                        _currentPosition != null
-                            ? _currentPosition.longitude
+                        widget.currentPosition != null
+                            ? widget.currentPosition.longitude
                             : 78.9629)),
               ),
               Container(

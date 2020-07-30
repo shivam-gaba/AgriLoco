@@ -2,6 +2,7 @@ import 'package:agri_loco/Components/CustomAuthorityFieldTile.dart';
 import 'package:agri_loco/Screens/Dashboards/Authority/AuthorityMapsScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 bool _isSpinnerShowing = false;
@@ -13,12 +14,31 @@ class VerifyFieldsScreen extends StatefulWidget {
 }
 
 class _VerifyFieldsScreenState extends State<VerifyFieldsScreen> {
+  Position _currentPosition;
+  Geolocator _geoLocator;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCurrentLocation();
+  }
+
+  void getCurrentLocation() async {
+    //Gets Current Location with help of GeoLocator library
+    _geoLocator = Geolocator()..forceAndroidLocationManager;
+
+    _currentPosition = await _geoLocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low);
+  }
+
   void verifyField(DocumentSnapshot field) async {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => AuthorityMapsScreen(
           khasraNumber: field.documentID,
+          currentPosition: _currentPosition,
         ),
       ),
     );

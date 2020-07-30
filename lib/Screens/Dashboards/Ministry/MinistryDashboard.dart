@@ -4,6 +4,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MinistryDashboard extends StatefulWidget {
@@ -13,59 +14,58 @@ class MinistryDashboard extends StatefulWidget {
   _MinistryDashboardState createState() => _MinistryDashboardState();
 }
 
+Geolocator _geoLocator;
+Position _currentPosition;
 int _currentPage = 0;
+
+void getCurrentLocation() async {
+  //Gets Current Location with help of GeoLocator library
+  _geoLocator = Geolocator()..forceAndroidLocationManager;
+
+  _currentPosition = await _geoLocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.low);
+}
 
 class _MinistryDashboardState extends State<MinistryDashboard> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCurrentLocation();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        CoolAlert.show(
-            context: context,
-            type: CoolAlertType.confirm,
-            confirmBtnColor: Colors.green.shade900,
-            title: 'Do you want to Exit ?',
-            confirmBtnText: 'Yes',
-            showCancelBtn: true,
-            cancelBtnText: 'No',
-            onConfirmBtnTap: () {
-              return SystemNavigator.pop();
-            });
-        return;
-      },
-      child: MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            leading: Icon(
-              Icons.filter_hdr,
-            ),
-            backgroundColor: Colors.green.shade900,
-            title: Text('AGRI LOCO',
-                style: GoogleFonts.indieFlower(
-                  letterSpacing: 3,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
-          bottomNavigationBar: FancyBottomNavigation(
-            textColor: Colors.white,
-            circleColor: Colors.greenAccent,
-            activeIconColor: Colors.green.shade900,
-            inactiveIconColor: Colors.greenAccent,
-            barBackgroundColor: Colors.green.shade900,
-            tabs: [
-              TabData(iconData: Icons.location_city, title: "Map"),
-              TabData(iconData: Icons.person_add, title: "Authorities"),
-            ],
-            onTabChangedListener: (position) {
-              setState(() {
-                _currentPage = position;
-              });
-            },
-          ),
-          backgroundColor: Colors.greenAccent,
-          body: getCurrentPage(_currentPage),
+    return Scaffold(
+      appBar: AppBar(
+        leading: Icon(
+          Icons.filter_hdr,
         ),
+        backgroundColor: Colors.green.shade900,
+        title: Text('AGRI LOCO',
+            style: GoogleFonts.indieFlower(
+              letterSpacing: 3,
+              fontWeight: FontWeight.bold,
+            )),
       ),
+      bottomNavigationBar: FancyBottomNavigation(
+        textColor: Colors.white,
+        circleColor: Colors.greenAccent,
+        activeIconColor: Colors.green.shade900,
+        inactiveIconColor: Colors.greenAccent,
+        barBackgroundColor: Colors.green.shade900,
+        tabs: [
+          TabData(iconData: Icons.person_add, title: "Authorities"),
+          TabData(iconData: Icons.location_city, title: "Map"),
+        ],
+        onTabChangedListener: (position) {
+          setState(() {
+            _currentPage = position;
+          });
+        },
+      ),
+      backgroundColor: Colors.greenAccent,
+      body: getCurrentPage(_currentPage),
     );
   }
 
@@ -73,9 +73,9 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
   Widget getCurrentPage(int pageNumber) {
     switch (pageNumber) {
       case 0:
-        return MinistryMapScreen();
-      case 1:
         return AuthorityAccountsScreen();
+      case 1:
+        return MinistryMapScreen(currentPosition: _currentPosition);
     }
   }
 }
