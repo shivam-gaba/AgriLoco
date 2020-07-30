@@ -71,7 +71,10 @@ class _VerifyFarmersScreenState extends State<VerifyFarmersScreen> {
                   name: farmer.data['name'] ?? '',
                   phoneNumber: farmer.data['phoneNumber'] ?? '',
                   adhaarNumber: farmer.data['adhaarNumber'] ?? '',
-                  address: farmer.data['address'] ?? '',
+                  city: farmer.data['city'] ?? '',
+                  state: farmer.data['state'] ?? '',
+                  district: farmer.data['district'] ?? '',
+                  village: farmer.data['village'] ?? '',
                   numberOfFields: farmer.data['numberOfFields'] ?? '',
                   khasraNumberList: farmer.data['khasraNumberList'] ?? [],
                   onVerifyClicked: () {

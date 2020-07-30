@@ -60,12 +60,15 @@ class _MinistryMapScreenState extends State<MinistryMapScreen> {
 
     //Here we got list of all geoPointLists
     for (var document in documents) {
-      fieldsGeoPointsList.add(document.data['fieldGeoPoints']);
-      cropNames.add(document.data['cropType']);
+      if (document.data['fieldGeoPoints'] != null &&
+          document.data['isVerified'] == true) {
+        fieldsGeoPointsList.add(document.data['fieldGeoPoints']);
+        cropNames.add(document.data['cropType']);
+      }
     }
 
-    fieldsLatLngsList = List.generate(
-        fieldsGeoPointsList.length, (index) => List(4),
+    fieldsLatLngsList = List.generate(fieldsGeoPointsList.length,
+        (index) => List(fieldsGeoPointsList[index].length),
         growable: true);
 
     for (int i = 0; i < fieldsGeoPointsList.length; i++) {

@@ -5,7 +5,14 @@ import 'CustomButton.dart';
 class CustomAuthorityFarmerTile extends StatelessWidget {
   final Function onVerifyClicked;
   final Function onRemoveClicked;
-  final String name, adhaarNumber, phoneNumber, address, numberOfFields;
+  final String name,
+      adhaarNumber,
+      phoneNumber,
+      numberOfFields,
+      city,
+      state,
+      village,
+      district;
   final List<dynamic> khasraNumberList;
 
   CustomAuthorityFarmerTile(
@@ -14,8 +21,11 @@ class CustomAuthorityFarmerTile extends StatelessWidget {
       this.name,
       this.adhaarNumber,
       this.phoneNumber,
-      this.address,
       this.numberOfFields,
+      this.city,
+      this.state,
+      this.village,
+      this.district,
       this.khasraNumberList});
 
   @override
@@ -45,7 +55,8 @@ class CustomAuthorityFarmerTile extends StatelessWidget {
             ListTile(
               title: Text('Address',
                   style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text(address),
+              subtitle: Text(
+                  '$village${district == city ? '' : ' , $district'} , $city , $state'),
             ),
             ListTile(
               title: Text('Phone Number',

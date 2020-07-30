@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 class NetworkingHelper {
   String url;
 
-  NetworkingHelper(this.url);
+  NetworkingHelper({this.url});
 
   Future getData() async {
     Response response = await get(url);

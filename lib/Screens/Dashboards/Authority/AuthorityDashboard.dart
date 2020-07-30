@@ -1,14 +1,11 @@
-import 'package:agri_loco/Screens/Dashboards/Authority/AuthorityMapsScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Authority/VerifyFarmersScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Authority/VerifyFieldsScreen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:agri_loco/Models/LoginData.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 int _currentPage = 0;
 

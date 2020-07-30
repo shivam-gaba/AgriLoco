@@ -1,4 +1,3 @@
-import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -25,19 +24,11 @@ class AuthorityMapsScreen extends StatefulWidget {
 
 class _AuthorityMapsScreenState extends State<AuthorityMapsScreen> {
   void getCurrentLocation() async {
-    setState(() {
-      _isSpinnerShowing = true;
-    });
-
     //Gets Current Location with help of GeoLocator library
     _geoLocator = Geolocator()..forceAndroidLocationManager;
 
     _currentPosition = await _geoLocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
-
-    setState(() {
-      _isSpinnerShowing = false;
-    });
   }
 
   @override

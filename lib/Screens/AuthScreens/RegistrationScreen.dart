@@ -108,11 +108,17 @@ class RegistrationScreen extends StatelessWidget {
                                             size: 20,
                                             color: Colors.green.shade900,
                                           ),
-                                          items: [],
+                                          items: [
+                                            DropdownMenuItem(
+                                              child: Text('Punjab'),
+                                              value: 'punjab',
+                                            )
+                                          ],
                                           hint: "State",
                                           searchHint: "Select State",
                                           onChanged: (value) {
                                             registrationData.state = value;
+                                            print(registrationData.state);
                                           },
                                           isExpanded: true,
                                         ),
@@ -132,7 +138,12 @@ class RegistrationScreen extends StatelessWidget {
                                             size: 20,
                                             color: Colors.green.shade900,
                                           ),
-                                          items: [],
+                                          items: [
+                                            DropdownMenuItem(
+                                              child: Text('Jalandhar'),
+                                              value: 'jalandhar',
+                                            )
+                                          ],
                                           hint: "City",
                                           searchHint: "Select City",
                                           onChanged: (value) {
@@ -157,7 +168,12 @@ class RegistrationScreen extends StatelessWidget {
                                             size: 20,
                                             color: Colors.green.shade900,
                                           ),
-                                          items: [],
+                                          items: [
+                                            DropdownMenuItem(
+                                              child: Text('Jalandhar'),
+                                              value: 'jalandhar',
+                                            )
+                                          ],
                                           hint: "District",
                                           searchHint: "Select District",
                                           onChanged: (value) {
@@ -181,7 +197,12 @@ class RegistrationScreen extends StatelessWidget {
                                             size: 20,
                                             color: Colors.green.shade900,
                                           ),
-                                          items: [],
+                                          items: [
+                                            DropdownMenuItem(
+                                              child: Text('Kahlon'),
+                                              value: 'kahlon',
+                                            )
+                                          ],
                                           hint: "Village",
                                           searchHint: "Select Village",
                                           onChanged: (value) {
