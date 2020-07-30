@@ -1,11 +1,11 @@
 import 'package:agri_loco/Screens/Dashboards/Ministry/AuthorityAccountsScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Ministry/MinistryMapScreen.dart';
-import 'package:cool_alert/cool_alert.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MinistryDashboard extends StatefulWidget {
   static const String id = 'ministryDashboardId';
@@ -17,6 +17,64 @@ class MinistryDashboard extends StatefulWidget {
 Geolocator _geoLocator;
 Position _currentPosition;
 int _currentPage = 0;
+List<List<dynamic>> _fieldsGeoPointsList = [];
+Set<dynamic> _polygons = Set<Polygon>();
+List<List<LatLng>> _fieldsLatLngsList = [];
+Firestore _firestore = Firestore.instance;
+
+void getPolygons() async {
+  var queries = await _firestore.collection('FieldsData').getDocuments();
+  var documents = queries.documents;
+  List<dynamic> cropNames = [];
+
+  //Here we got list of all geoPointLists
+  for (var document in documents) {
+    if (document.data['fieldGeoPoints'] != null &&
+        document.data['isVerified'] == true) {
+      _fieldsGeoPointsList.add(document.data['fieldGeoPoints']);
+      cropNames.add(document.data['cropType']);
+    }
+  }
+
+  _fieldsLatLngsList = List.generate(_fieldsGeoPointsList.length,
+      (index) => List(_fieldsGeoPointsList[index].length),
+      growable: true);
+
+  for (int i = 0; i < _fieldsGeoPointsList.length; i++) {
+    for (int j = 0; j < _fieldsGeoPointsList[i].length; j++) {
+      _fieldsLatLngsList[i][j] = (LatLng(_fieldsGeoPointsList[i][j].latitude,
+          _fieldsGeoPointsList[i][j].longitude));
+    }
+  }
+
+  for (int i = 0; i < _fieldsLatLngsList.length; i++) {
+    _polygons.add(Polygon(
+      strokeWidth: 0,
+      fillColor: getCropColor(cropNames[i]).withOpacity(0.8),
+      points: _fieldsLatLngsList[i],
+      polygonId: PolygonId(_fieldsLatLngsList[i].toString()),
+    ));
+  }
+}
+
+Color getCropColor(String fieldName) {
+  switch (fieldName.toLowerCase()) {
+    case 'wheat':
+      return Colors.red;
+
+    case 'maize':
+      return Colors.blue;
+
+    case 'rice':
+      return Colors.yellow;
+
+    case 'sweetcorn':
+      return Colors.brown;
+
+    default:
+      return Colors.black54;
+  }
+}
 
 void getCurrentLocation() async {
   //Gets Current Location with help of GeoLocator library
@@ -32,6 +90,10 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
     // TODO: implement initState
     super.initState();
     getCurrentLocation();
+    _fieldsGeoPointsList.clear();
+    _polygons.clear();
+    _fieldsLatLngsList.clear();
+    getPolygons();
   }
 
   @override
@@ -75,7 +137,10 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
       case 0:
         return AuthorityAccountsScreen();
       case 1:
-        return MinistryMapScreen(currentPosition: _currentPosition);
+        return MinistryMapScreen(
+          currentPosition: _currentPosition,
+          polygons: _polygons,
+        );
     }
   }
 }
