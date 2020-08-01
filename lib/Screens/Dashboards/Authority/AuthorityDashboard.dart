@@ -17,10 +17,34 @@ class AuthorityDashboard extends StatefulWidget {
 }
 
 class _AuthorityDashboardState extends State<AuthorityDashboard> {
+  void menuItemSelected(String option) {
+    switch (option) {
+      case 'Send Notification':
+        break;
+
+      case 'Logout':
+        Navigator.pop(context);
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: menuItemSelected,
+            itemBuilder: (BuildContext context) {
+              return {'Send Notification', 'Logout'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
         leading: Icon(
           Icons.filter_hdr,
         ),

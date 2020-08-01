@@ -31,7 +31,7 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
         'ownerId': loginData.adhaarNumber,
         'isVerified': false,
         'cropType': cropType,
-        'fieldSize': fieldSize,
+        'fieldSize': '$fieldSize yards',
         'waterSource': waterSource,
       }).whenComplete(() {
         setState(() {

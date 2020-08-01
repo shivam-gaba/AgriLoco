@@ -34,6 +34,17 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
     });
   }
 
+  void menuItemSelected(String option) {
+    switch (option) {
+      case 'Notifications':
+        break;
+
+      case 'Logout':
+        Navigator.pop(context);
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginData>(
@@ -41,6 +52,19 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
       return Scaffold(
         appBar: AppBar(
           leading: Icon(Icons.filter_hdr),
+          actions: <Widget>[
+            PopupMenuButton<String>(
+              onSelected: menuItemSelected,
+              itemBuilder: (BuildContext context) {
+                return {'Notifications', 'Logout'}.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
+          ],
           backgroundColor: Colors.green.shade900,
           title: Text('AGRI LOCO',
               style: GoogleFonts.indieFlower(
