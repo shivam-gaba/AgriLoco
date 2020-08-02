@@ -21,6 +21,7 @@ class _MinistryMapScreenState extends State<MinistryMapScreen> {
     return ModalProgressHUD(
       inAsyncCall: _isSpinnerShowing,
       child: GoogleMap(
+        myLocationButtonEnabled: true,
         compassEnabled: true,
         myLocationEnabled: true,
         mapType: MapType.hybrid,

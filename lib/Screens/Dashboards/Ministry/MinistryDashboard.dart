@@ -1,5 +1,6 @@
 import 'package:agri_loco/Screens/Dashboards/Ministry/AuthorityAccountsScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Ministry/MinistryMapScreen.dart';
+import 'package:agri_loco/Screens/Dashboards/Ministry/WaterReportScreen.dart';
 import 'package:agri_loco/Screens/SendNotificationScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
@@ -7,9 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-
-import 'DownloadDataScreen.dart';
 
 class MinistryDashboard extends StatefulWidget {
   static const String id = 'ministryDashboardId';
@@ -153,7 +151,7 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
         tabs: [
           TabData(iconData: Icons.person_add, title: "Authorities"),
           TabData(iconData: Icons.location_city, title: "Map"),
-          TabData(iconData: Icons.cloud_download, title: "Download Data"),
+          TabData(iconData: Icons.cloud_download, title: "Water Report"),
         ],
         onTabChangedListener: (position) {
           setState(() {
@@ -178,7 +176,7 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
         );
 
       case 2:
-        return DownloadDataScreen();
+        return WaterReportScreen();
     }
   }
 }

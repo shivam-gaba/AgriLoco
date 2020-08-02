@@ -6,11 +6,21 @@ class LoginData extends ChangeNotifier {
 
   String _name,
       _role,
-      _address,
-      _phoneNumber,
       _adhaarNumber,
+      _phoneNumber,
+      _city,
+      _state,
+      _village,
+      _district,
       _password,
       _numberOfFields;
+
+  get city => _city;
+
+  set city(value) {
+    _city = value;
+    notifyListeners();
+  }
 
   UnmodifiableMapView<int, int> get getKhasraNumberList {
     return UnmodifiableMapView(_khasraNumbersList);
@@ -26,18 +36,13 @@ class LoginData extends ChangeNotifier {
     notifyListeners();
   }
 
-  set address(value) {
-    _address = value;
+  set adhaarNumber(value) {
+    _adhaarNumber = value;
     notifyListeners();
   }
 
   set phoneNumber(value) {
     _phoneNumber = value;
-    notifyListeners();
-  }
-
-  set adhaarNumber(value) {
-    _adhaarNumber = value;
     notifyListeners();
   }
 
@@ -60,13 +65,32 @@ class LoginData extends ChangeNotifier {
 
   get password => _password;
 
-  get adhaarNumber => _adhaarNumber;
-
   get phoneNumber => _phoneNumber;
 
-  get address => _address;
+  get adhaarNumber => _adhaarNumber;
 
   get name => _name;
 
   get role => _role;
+
+  get state => _state;
+
+  set state(value) {
+    _state = value;
+    notifyListeners();
+  }
+
+  get village => _village;
+
+  set village(value) {
+    _village = value;
+    notifyListeners();
+  }
+
+  get district => _district;
+
+  set district(value) {
+    _district = value;
+    notifyListeners();
+  }
 }

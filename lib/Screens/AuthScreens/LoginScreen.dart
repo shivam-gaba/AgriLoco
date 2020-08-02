@@ -15,8 +15,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:provider/provider.dart';
 
-import 'WelcomeScreen.dart';
-
 bool _isSpinnerShowing = false;
 
 class LoginScreen extends StatefulWidget {
@@ -28,7 +26,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   void setFarmerData(LoginData loginData, DocumentSnapshot _farmerData) {
-    loginData.address = _farmerData.data["address"];
+    loginData.village = _farmerData.data["village"];
+    loginData.city = _farmerData.data["city"];
+    loginData.state = _farmerData.data["state"];
+    loginData.district = _farmerData.data["district"];
     loginData.numberOfFields = _farmerData.data["numberOfFields"];
     loginData.phoneNumber = _farmerData.data["phoneNumber"];
     loginData.name = _farmerData.data["name"];
@@ -222,6 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (loginData.role == null) {
                                 loginData.role = 'Farmer';
                               }
+                              print(loginData.password);
                               loginUser(loginData, context);
                             },
                             text: 'Login',

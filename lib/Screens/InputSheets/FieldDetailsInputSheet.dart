@@ -20,10 +20,10 @@ class FieldDetailsInputSheet extends StatefulWidget {
 }
 
 bool _isSpinnerShowing = false;
-List<DropdownMenuItem> cropsList = [];
+List<DropdownMenuItem> _cropsList = [];
 
 class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
-  String khasraNumber, cropType, fieldSize, waterSource;
+  String _khasraNumber, _cropType, _fieldSize, _waterSource;
 
   Future<void> sendFieldData(LoginData loginData, BuildContext context) async {
     setState(() {
@@ -35,13 +35,13 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
       var fieldsData = _firestore.collection('FieldsData');
 
       await fieldsData
-          .document(khasraNumber ?? widget.field.documentID)
+          .document(_khasraNumber ?? widget.field.documentID)
           .setData({
         'ownerId': loginData.adhaarNumber,
         'isVerified': false,
-        'cropType': cropType,
-        'fieldSize': '$fieldSize yards',
-        'waterSource': waterSource,
+        'cropType': _cropType,
+        'fieldSize': '$_fieldSize Acre',
+        'waterSource': _waterSource,
       }).whenComplete(() {
         setState(() {
           _isSpinnerShowing = false;
@@ -72,7 +72,7 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
     // TODO: implement initState
     super.initState();
     for (int i = 0; i < crops.length; i++) {
-      cropsList.add(DropdownMenuItem(
+      _cropsList.add(DropdownMenuItem(
         child: Text(crops[i]),
         value: crops[i],
       ));
@@ -96,7 +96,7 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                       inputType: TextInputType.number,
                       onSubmitted: (value) {
                         setState(() {
-                          khasraNumber = value;
+                          _khasraNumber = value;
                         });
                       },
                     )
@@ -108,7 +108,7 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                 inputType: TextInputType.number,
                 onSubmitted: (value) {
                   setState(() {
-                    fieldSize = value;
+                    _fieldSize = value;
                   });
                 },
               ),
@@ -132,12 +132,12 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                         size: 20,
                         color: Colors.green.shade900,
                       ),
-                      items: cropsList,
+                      items: _cropsList,
                       hint: "Select Crop Type",
                       searchHint: "Select Crop",
                       onChanged: (value) {
                         setState(() {
-                          cropType = value;
+                          _cropType = value;
                         });
                       },
                       isExpanded: true,
@@ -159,7 +159,7 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                   buttonValues: ["Canal", "Ground"],
                   radioButtonValue: (value) {
                     setState(() {
-                      waterSource = value;
+                      _waterSource = value;
                     });
                   },
                   selectedColor: Colors.green.shade900,
@@ -174,11 +174,11 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
 
                     //Add clicked
                     if (widget.field == null) {
-                      if (khasraNumber != null &&
-                          fieldSize != null &&
-                          cropType != null) {
-                        if (waterSource == null) {
-                          waterSource = 'Canal';
+                      if (_khasraNumber != null &&
+                          _fieldSize != null &&
+                          _cropType != null) {
+                        if (_waterSource == null) {
+                          _waterSource = 'Canal';
                         }
                         sendFieldData(loginData, context);
                       } else {
@@ -189,9 +189,9 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                             confirmBtnColor: Colors.green.shade900);
                       }
                     } else {
-                      if (fieldSize != null && cropType != null) {
-                        if (waterSource == null) {
-                          waterSource = 'Canal';
+                      if (_fieldSize != null && _cropType != null) {
+                        if (_waterSource == null) {
+                          _waterSource = 'Canal';
                         }
                         sendFieldData(loginData, context);
                       } else {

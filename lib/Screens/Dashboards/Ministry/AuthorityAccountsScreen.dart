@@ -43,7 +43,10 @@ class _AuthorityAccountsScreenState extends State<AuthorityAccountsScreen> {
               showModalBottomSheet(
                   context: context,
                   builder: (context) {
-                    return AuthorityDetailsInputSheet();
+                    return AuthorityDetailsInputSheet(
+                      isEdit: false,
+                      authority: null,
+                    );
                   });
             },
           ),
@@ -70,7 +73,10 @@ class _AuthorityAccountsScreenState extends State<AuthorityAccountsScreen> {
                           showModalBottomSheet(
                               context: context,
                               builder: (context) {
-                                return AuthorityDetailsInputSheet();
+                                return AuthorityDetailsInputSheet(
+                                  isEdit: true,
+                                  authority: authority,
+                                );
                               });
                         },
                         onRemoveClicked: () {
