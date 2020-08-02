@@ -1,10 +1,9 @@
 import 'package:agri_loco/Components/CustomFarmerFieldTile.dart';
 import 'package:agri_loco/Models/LoginData.dart';
+import 'package:agri_loco/Screens/Dashboards/Farmer/NotificationsScreen.dart';
 import 'package:agri_loco/Screens/InputSheets/FieldDetailsInputSheet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -37,12 +36,20 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
   void menuItemSelected(String option) {
     switch (option) {
       case 'Notifications':
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NotificationsScreen()));
         break;
 
       case 'Logout':
         Navigator.pop(context);
         break;
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -79,7 +86,10 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
             showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return FieldDetailsInputSheet();
+                  return FieldDetailsInputSheet(
+                    isEdit: false,
+                    field: null,
+                  );
                 });
           },
           child: Icon(Icons.add),
@@ -105,7 +115,10 @@ class _FarmerDashboardState extends State<FarmerDashboard> {
                         showModalBottomSheet(
                             context: context,
                             builder: (context) {
-                              return FieldDetailsInputSheet();
+                              return FieldDetailsInputSheet(
+                                isEdit: true,
+                                field: field,
+                              );
                             });
                       },
                       onDeleteClicked: () {

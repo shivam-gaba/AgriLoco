@@ -2,10 +2,13 @@ import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Components/CustomTitle.dart';
 import 'package:agri_loco/Models/FarmerRegData.dart';
+import 'package:agri_loco/Screens/InputSheets/AuthorityDetailsInputSheet.dart';
 import 'package:agri_loco/Screens/InputSheets/KhasraNumberInputSheet.dart';
+import 'package:beauty_textfield/beauty_textfield.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:passwordfield/passwordfield.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 
@@ -68,11 +71,26 @@ class RegistrationScreen extends StatelessWidget {
                             registrationData.numberOfFields = data;
                           },
                         ),
-                        CustomTextField(
-                          hint: 'Password',
-                          onSubmitted: (data) {
-                            registrationData.password = data;
-                          },
+                        Container(
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black12, width: 2),
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.lightGreen.shade100,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: PasswordField(
+                              onSubmit: (value) {
+                                registrationData.password = value;
+                              },
+                              onChanged: (value) {
+                                registrationData.password = value;
+                              },
+                              color: Colors.green,
+                              hasFloatingPlaceholder: true,
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 20,

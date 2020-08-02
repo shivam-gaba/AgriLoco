@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../SendNotificationScreen.dart';
+
 int _currentPage = 0;
 
 class AuthorityDashboard extends StatefulWidget {
@@ -20,6 +22,10 @@ class _AuthorityDashboardState extends State<AuthorityDashboard> {
   void menuItemSelected(String option) {
     switch (option) {
       case 'Send Notification':
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SendNotificationScreen('Authority')));
         break;
 
       case 'Logout':

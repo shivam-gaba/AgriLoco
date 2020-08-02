@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:passwordfield/passwordfield.dart';
 import 'package:provider/provider.dart';
 
 import 'WelcomeScreen.dart';
@@ -190,11 +191,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               loginData.adhaarNumber = data;
                             },
                           ),
-                          CustomTextField(
-                            hint: 'Password',
-                            onSubmitted: (data) {
-                              loginData.password = data;
-                            },
+                          Container(
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.black12, width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.lightGreen.shade100,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: PasswordField(
+                                onSubmit: (value) {
+                                  loginData.password = value;
+                                },
+                                onChanged: (value) {
+                                  loginData.password = value;
+                                },
+                                color: Colors.green,
+                                hasFloatingPlaceholder: true,
+                              ),
+                            ),
                           ),
                           CustomButton(
                             color: Colors.green.shade900,
