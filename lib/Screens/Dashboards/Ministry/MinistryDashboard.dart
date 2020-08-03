@@ -1,6 +1,8 @@
 import 'package:agri_loco/Screens/Dashboards/Ministry/AuthorityAccountsScreen.dart';
+import 'package:agri_loco/Screens/Dashboards/Ministry/MapHistoryInputScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Ministry/MinistryMapScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Ministry/InputWaterReportScreen.dart';
+import 'package:agri_loco/Screens/Dashboards/Ministry/ResetSeasonScreen.dart';
 import 'package:agri_loco/Screens/SendNotificationScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
@@ -99,6 +101,11 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
       case 'Logout':
         Navigator.pop(context);
         break;
+
+      case 'Map History':
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => MapHistoryInputSheet()));
+        break;
     }
   }
 
@@ -121,7 +128,8 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
           PopupMenuButton<String>(
             onSelected: menuItemSelected,
             itemBuilder: (BuildContext context) {
-              return {'Send Notification', 'Logout'}.map((String choice) {
+              return {'Send Notification', 'Map History', 'Logout'}
+                  .map((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
                   child: Text(choice),
@@ -150,6 +158,8 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
           TabData(iconData: Icons.person_add, title: "Authorities"),
           TabData(iconData: Icons.location_city, title: "Map"),
           TabData(iconData: Icons.cloud_download, title: "Water Report"),
+          TabData(
+              iconData: Icons.settings_backup_restore, title: "Reset season"),
         ],
         onTabChangedListener: (position) {
           setState(() {
@@ -175,6 +185,9 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
 
       case 2:
         return InputWaterReportScreen();
+
+      case 3:
+        return ResetSeasonScreen();
     }
   }
 }

@@ -23,7 +23,13 @@ bool _isSpinnerShowing = false;
 List<DropdownMenuItem> _cropsList = [];
 
 class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
-  String _khasraNumber, _cropType, _fieldSize, _waterSource;
+  String _khasraNumber,
+      _cropType,
+      _fieldSize,
+      _waterSource,
+      groundType,
+      wellType,
+      soilType;
 
   Future<void> sendFieldData(LoginData loginData, BuildContext context) async {
     setState(() {
@@ -46,6 +52,9 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
         'state': loginData.state,
         'district': loginData.district,
         'village': loginData.village,
+        'wellType': wellType,
+        'groundType': groundType,
+        'soilType': soilType,
       }).whenComplete(() {
         setState(() {
           _isSpinnerShowing = false;
@@ -149,6 +158,64 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                   ),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color: Colors.lightGreen.shade100,
+                    border: Border.all(color: Colors.black12, width: 2),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SearchableDropdown.single(
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        size: 20,
+                        color: Colors.green.shade900,
+                      ),
+                      clearIcon: Icon(
+                        Icons.cancel,
+                        size: 20,
+                        color: Colors.green.shade900,
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          value: 'Red Soil',
+                          child: Text('Red Soil'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Black Soil',
+                          child: Text('Black Soil'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Laterine Soil',
+                          child: Text('Laterine Soil'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Arid Soil',
+                          child: Text('Arid Soil'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Alluvial Soil',
+                          child: Text('Alluvial Soil'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Forest Soil',
+                          child: Text('Forest Soil'),
+                        ),
+                      ],
+                      hint: "Select Soil Type",
+                      searchHint: "Select Soil Type",
+                      onChanged: (value) {
+                        setState(() {
+                          soilType = value;
+                        });
+                      },
+                      isExpanded: true,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 10,
               ),
@@ -157,7 +224,6 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                 child: CustomRadioButton(
                   buttonColor: Colors.white,
                   autoWidth: true,
-                  height: 40,
                   enableShape: true,
                   buttonLables: ["Canal", "Ground"],
                   buttonValues: ["Canal", "Ground"],
@@ -170,6 +236,25 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
                   padding: 0,
                 ),
               ),
+              if (_waterSource == 'Ground')
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                  child: CustomRadioButton(
+                    horizontal: true,
+                    buttonColor: Colors.white,
+                    autoWidth: true,
+                    height: 40,
+                    buttonLables: ["Well", "Bore Well", "Tube Well"],
+                    buttonValues: ["Well", "Bore Well", "Tube Well"],
+                    radioButtonValue: (value) {
+                      setState(() {
+                        wellType = value;
+                      });
+                    },
+                    selectedColor: Colors.green.shade900,
+                    padding: 0,
+                  ),
+                ),
               CustomButton(
                   color: Colors.green.shade900,
                   text: 'Submit',

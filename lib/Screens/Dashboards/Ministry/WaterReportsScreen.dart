@@ -58,16 +58,16 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
             padding: const EdgeInsets.all(10),
             child: Table(
               defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              border: TableBorder.all(color: Colors.white, width: 2),
+              border: TableBorder.all(color: Colors.green.shade900, width: 2),
               children: [
                 TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text('Khasra Number',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: FontWeight.bold))),
-                  ),
+//                  Padding(
+//                    padding: const EdgeInsets.all(8.0),
+//                    child: TableCell(
+//                        child: Text('Khasra Number',
+//                            textAlign: TextAlign.center,
+//                            style: TextStyle(fontWeight: FontWeight.bold))),
+//                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
@@ -105,12 +105,12 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
                   )
                 ]),
                 TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[0].khasraNumber,
-                            textAlign: TextAlign.center)),
-                  ),
+//                  Padding(
+//                    padding: const EdgeInsets.all(8.0),
+//                    child: TableCell(
+//                        child: Text(widget.waterReportsList[0].khasraNumber,
+//                            textAlign: TextAlign.center)),
+//                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
@@ -143,12 +143,12 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
                   ),
                 ]),
                 TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[1].khasraNumber,
-                            textAlign: TextAlign.center)),
-                  ),
+//                  Padding(
+//                    padding: const EdgeInsets.all(8.0),
+//                    child: TableCell(
+//                        child: Text(widget.waterReportsList[1].khasraNumber,
+//                            textAlign: TextAlign.center)),
+//                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
@@ -181,12 +181,12 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
                   ),
                 ]),
                 TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[2].khasraNumber,
-                            textAlign: TextAlign.center)),
-                  ),
+//                  Padding(
+//                    padding: const EdgeInsets.all(8.0),
+//                    child: TableCell(
+//                        child: Text(widget.waterReportsList[2].khasraNumber,
+//                            textAlign: TextAlign.center)),
+//                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
@@ -219,12 +219,12 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
                   ),
                 ]),
                 TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[3].khasraNumber,
-                            textAlign: TextAlign.center)),
-                  ),
+//                  Padding(
+//                    padding: const EdgeInsets.all(8.0),
+//                    child: TableCell(
+//                        child: Text(widget.waterReportsList[3].khasraNumber,
+//                            textAlign: TextAlign.center)),
+//                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(

@@ -1,4 +1,5 @@
 import 'package:agri_loco/Components/CustomButton.dart';
+import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:agri_loco/Models/WaterReportModel.dart';
 import 'package:agri_loco/Utilities/Constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -179,6 +180,24 @@ class _InputWaterReportScreenState extends State<InputWaterReportScreen> {
                 });
               },
               isExpanded: true,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomTextField(
+              hint: 'Ground Water Level',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomTextField(
+              hint: 'Surface Water Level',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomTextField(
+              hint: 'Rain Water Level',
             ),
           ),
           Container(
