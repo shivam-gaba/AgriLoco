@@ -92,6 +92,28 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
+                        child: Text('Soil type',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold))),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text('Water Source',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold))),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text('Ground Water type',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold))),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
                         child: Text('Average Water consumption',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold))),
@@ -99,161 +121,305 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text('Water Source',
+                        child: Text('Water Efficiency',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold))),
-                  )
-                ]),
-                TableRow(children: [
-//                  Padding(
-//                    padding: const EdgeInsets.all(8.0),
-//                    child: TableCell(
-//                        child: Text(widget.waterReportsList[0].khasraNumber,
-//                            textAlign: TextAlign.center)),
-//                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[0].cropType,
-                            textAlign: TextAlign.center)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[0].village,
-                            textAlign: TextAlign.center)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[0].fieldSize,
-                            textAlign: TextAlign.center)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text('${widget.waterReportsList[0].fieldSize}0',
-                            textAlign: TextAlign.center)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TableCell(
-                        child: Text(widget.waterReportsList[0].waterSource,
-                            textAlign: TextAlign.center)),
                   ),
                 ]),
                 TableRow(children: [
 //                  Padding(
 //                    padding: const EdgeInsets.all(8.0),
 //                    child: TableCell(
-//                        child: Text(widget.waterReportsList[1].khasraNumber,
-//                            textAlign: TextAlign.center)),
+//                        child: Text('Khasra Number',
+//                            textAlign: TextAlign.center,
+//                            style: TextStyle(fontWeight: FontWeight.bold))),
 //                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[1].cropType,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Maize',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[1].village,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Mohali',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[1].fieldSize,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      '23',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text('${widget.waterReportsList[1].fieldSize}0',
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Red Soil',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Canal',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[1].waterSource,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      '-',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      '230',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Efficient',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                 ]),
                 TableRow(children: [
 //                  Padding(
 //                    padding: const EdgeInsets.all(8.0),
 //                    child: TableCell(
-//                        child: Text(widget.waterReportsList[2].khasraNumber,
-//                            textAlign: TextAlign.center)),
+//                        child: Text('Khasra Number',
+//                            textAlign: TextAlign.center,
+//                            style: TextStyle(fontWeight: FontWeight.bold))),
 //                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[2].cropType,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Green Gram',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[2].village,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Kahlon',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[2].fieldSize,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      '31',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text('${widget.waterReportsList[2].fieldSize}0',
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Arid Soil',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Ground',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[2].waterSource,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Well',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      '620',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Efficient',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                 ]),
                 TableRow(children: [
 //                  Padding(
 //                    padding: const EdgeInsets.all(8.0),
 //                    child: TableCell(
-//                        child: Text(widget.waterReportsList[3].khasraNumber,
-//                            textAlign: TextAlign.center)),
+//                        child: Text('Khasra Number',
+//                            textAlign: TextAlign.center,
+//                            style: TextStyle(fontWeight: FontWeight.bold))),
 //                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[3].cropType,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Chick Pea',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[3].village,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Rajpura',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[3].fieldSize,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      '24',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text('${widget.waterReportsList[3].fieldSize}0',
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      'Black Soil',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Canal',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TableCell(
-                        child: Text(widget.waterReportsList[3].waterSource,
-                            textAlign: TextAlign.center)),
+                        child: Text(
+                      '-',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      '960',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Efficient',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                ]),
+                TableRow(children: [
+//                  Padding(
+//                    padding: const EdgeInsets.all(8.0),
+//                    child: TableCell(
+//                        child: Text('Khasra Number',
+//                            textAlign: TextAlign.center,
+//                            style: TextStyle(fontWeight: FontWeight.bold))),
+//                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Black Gram',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'ZirakPur',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      '20',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Alluvial Soil',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Ground',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Tube Well',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      '180',
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TableCell(
+                        child: Text(
+                      'Efficient',
+                      textAlign: TextAlign.center,
+                    )),
                   ),
                 ]),
               ],
