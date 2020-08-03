@@ -40,8 +40,12 @@ class _FieldDetailsInputSheetState extends State<FieldDetailsInputSheet> {
         'ownerId': loginData.adhaarNumber,
         'isVerified': false,
         'cropType': _cropType,
-        'fieldSize': '$_fieldSize Acre',
+        'fieldSize': '$_fieldSize',
         'waterSource': _waterSource,
+        'city': loginData.city,
+        'state': loginData.state,
+        'district': loginData.district,
+        'village': loginData.village,
       }).whenComplete(() {
         setState(() {
           _isSpinnerShowing = false;

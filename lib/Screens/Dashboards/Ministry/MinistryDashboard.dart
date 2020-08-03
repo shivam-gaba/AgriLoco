@@ -1,6 +1,6 @@
 import 'package:agri_loco/Screens/Dashboards/Ministry/AuthorityAccountsScreen.dart';
 import 'package:agri_loco/Screens/Dashboards/Ministry/MinistryMapScreen.dart';
-import 'package:agri_loco/Screens/Dashboards/Ministry/WaterReportScreen.dart';
+import 'package:agri_loco/Screens/Dashboards/Ministry/InputWaterReportScreen.dart';
 import 'package:agri_loco/Screens/SendNotificationScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
@@ -60,24 +60,22 @@ void getPolygons() async {
 }
 
 Color getCropColor(String fieldName) {
-  return Colors.green;
+  switch (fieldName.toLowerCase()) {
+    case 'greengram':
+      return Colors.red;
 
-//  switch (fieldName.toLowerCase()) {
-//    case 'wheat':
-//      return Colors.red;
-//
-//    case 'maize':
-//      return Colors.blue;
-//
-//    case 'rice':
-//      return Colors.yellow;
-//
-//    case 'sweetcorn':
-//      return Colors.brown;
-//
-//    default:
-//      return Colors.black54;
-//  }
+    case 'maize':
+      return Colors.blue;
+
+    case 'chick pea':
+      return Colors.yellow;
+
+    case 'black gram/gram/urd':
+      return Colors.brown;
+
+    default:
+      return Colors.black54;
+  }
 }
 
 void getCurrentLocation() async {
@@ -176,7 +174,7 @@ class _MinistryDashboardState extends State<MinistryDashboard> {
         );
 
       case 2:
-        return WaterReportScreen();
+        return InputWaterReportScreen();
     }
   }
 }

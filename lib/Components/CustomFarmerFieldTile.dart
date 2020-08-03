@@ -1,6 +1,5 @@
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CustomFarmerFieldTile extends StatelessWidget {
   final Function onDeleteClicked;

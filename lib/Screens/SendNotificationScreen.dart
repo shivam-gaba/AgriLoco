@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:agri_loco/Components/CustomButton.dart';
 import 'package:agri_loco/Components/CustomTextField.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

@@ -1,7 +1,6 @@
 import 'package:agri_loco/Components/CustomAuthorityFarmerTile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 bool _isSpinnerShowing = false;
