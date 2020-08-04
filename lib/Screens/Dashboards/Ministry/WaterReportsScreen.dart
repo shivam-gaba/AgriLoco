@@ -443,7 +443,7 @@ class _WaterReportsScreenState extends State<WaterReportsScreen> {
                   context: context,
                   type: CoolAlertType.info,
                   confirmBtnColor: Colors.green.shade900,
-                  title: 'download Successful !! ',
+                  title: 'Download Successful !! ',
                 );
               },
               text: "Export Data",
